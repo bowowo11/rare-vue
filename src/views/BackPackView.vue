@@ -14,7 +14,7 @@
   </div>
 
 </template>
-<style>
+<style scoped>
 p{
     text-align: left;
     background: aqua;

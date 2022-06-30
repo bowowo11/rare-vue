@@ -3,6 +3,7 @@
     <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
+      <router-link to="/mainInterface">主界面</router-link> |
       <router-link to="/chouKa">抽卡</router-link>
     </nav>
     <img alt="Vue logo" src="../assets/logo.png">
