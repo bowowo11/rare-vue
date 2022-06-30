@@ -26,16 +26,16 @@ export default {
   margin: 0px;
   border: 1px solid black;
   width: 100%;
+  
 }
 #pic{
     flex:1;
     border-radius: 25px;
     border: 1px solid black;
-    aspect-ratio: 1;
 }
 img{
-  width: auto;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 #name{
   flex:3;
