@@ -13,7 +13,7 @@
     <div class="mode1">
       <p>SR</p>
       <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-    <li v-for="j in sr" :key="j" class="infinite-list-item-sr">{{ j }}</li>
+    <li v-for="j in sr" :key="j" class="infinite-list-item-sr">{{ j.name }}</li>
   </ul>
       
   </div>
@@ -26,19 +26,28 @@
 
 </template>
 <script>
+
 export default {
   name: "chouKa",
+  // card:{
+  //   urList:[
+  //     {name:丁真,rank:ur},
+  //     {name:ayaya,rank:ur},
+  //     {name:niuniu,rank:ur},
+  //   ]
+
+  // },
   data() {
     return {
       //根据服务器的数据显示
       ur: [
-        1,2,3
+        1,2,3,4,5
       ],
       sr:[
-        1,2,3,4,5,6,7
+        {name:1,rank:'ur'},{name:22,rank:'ur'},3,4,5,6,7
       ],
       r:[
-        1,2,3,4,5
+        1,2,3,4,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
       ],
       
     }
@@ -50,6 +59,7 @@ export default {
   }
 }
 </script>
+
 <style scoped>
 p{
     text-align: left;
@@ -70,6 +80,7 @@ p{
    margin-bottom: 200px;
 }
 .infinite-list {
+  
   display:grid;
   grid-template-columns: repeat(5,20vw);
   padding: 10px;
@@ -84,8 +95,11 @@ p{
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: auto;
+  width: 350px;
   background: var(--el-color-primary-light-9);
+  background-image: url("3.png");
+   background-size:100% 100%;
+  background-repeat:no-repeat;
   margin: 10px;
   color: var(--el-color-primary);
 }
@@ -95,8 +109,11 @@ p{
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: auto;
+  width: 350px;
   background: var(--el-color-primary-light-9);
+  background-image: url("3.png");
+   background-size:100% 100%;
+  background-repeat:no-repeat;
   margin: 10px;
   color: var(--el-color-primary);
 }
@@ -106,8 +123,11 @@ p{
   align-items: center;
   justify-content: center;
   height: 200px;
-  width: auto;
+  width: 350px;
   background: var(--el-color-primary-light-9);
+  background-image: url("3.png");
+   background-size:100% 100%;
+  background-repeat:no-repeat;
   margin: 10px;
   color: var(--el-color-primary);
 }
