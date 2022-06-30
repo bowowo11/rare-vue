@@ -6,13 +6,13 @@
           <div id="msg">个人信息：{{ msg }}</div>
           <el-container>
             <el-button type="primary" round id="diamond">钻石：{{ diamond }}</el-button>
-            <el-button type="primary" round id="recharge">充值</el-button>
+            <el-button type="primary" round id="recharge" @click="recharge">充值</el-button>
           </el-container>
         </el-container>
       </el-header>
       <el-container>
         <el-aside width="200px">
-
+          11111111111111
         </el-aside>
         <el-container>
           <el-main>
@@ -24,13 +24,29 @@
           </el-main>
           <el-footer>
             <el-container>
-              <el-button type="primary" round id="lottery01">来发单抽</el-button>
-              <el-button type="primary" round id="lottery10">直接十连</el-button>
+              <div id="chouKa">
+                <div class="wrap">
+                  <button id="triggerBtn">模态框</button>
+                  <button id="triggerBtn">模态框</button>
+<!--                  <a href="#modal-one" class="btn btn-big">来发单抽</a>-->
+<!--                </div>-->
+<!--                <div class="wrap">-->
+<!--                  <a href="#modal-one" class="btn btn-big">直接十连</a>-->
+                </div>
+              </div>
             </el-container>
           </el-footer>
         </el-container>
       </el-container>
     </el-container>
+    <div class="modal" id="modal-one" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-body">{{ picture }}</div>
+        <div class="modal-footer">
+          <a href="#" class="btn">Nice!</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -40,6 +56,7 @@ export default {
     return {
       diamond: "111111111111",
       msg: "小熊",
+      picture: "",
       imgWrap: [
         {url: require("../assets/5.jpg")},
         {url: require("../assets/4.jpg")},
@@ -50,8 +67,8 @@ export default {
     }
   },
   methods: {
-    clickRecharge() {
-
+    recharge() {
+      this.diamond = "1"
     }
   }
 }
@@ -118,15 +135,93 @@ export default {
   height: inherit;
 }
 
-#lottery01 {
-  width: 50%;
-  height: 100%;
+.wrap {
+  padding: 40px;
   text-align: center;
 }
 
-#lottery10 {
-  width: 50%;
-  height: 100%;
+.btn {
+  background: #428bca;
+  border: #357ebd solid 1px;
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  font-size: 14px;
+  padding: 8px 15px;
+  text-decoration: none;
   text-align: center;
+  min-width: 60px;
+  position: relative;
+  transition: color 0.1s ease;
+}
+
+.btn:hover {
+  background: #357ebd;
+}
+
+.btn.btn-big {
+  font-size: 18px;
+  padding: 15px 20px;
+  min-width: 100px;
+}
+
+.modal:before {
+  content: "";
+  display: none;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.modal:target:before {
+  display: block;
+}
+
+.modal:target .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+  top: 20%;
+}
+
+.modal-dialog {
+  background: #fefefe;
+  border: #333 solid 1px;
+  border-radius: 5px;
+  margin-left: -200px;
+  position: fixed;
+  left: 50%;
+  top: -100%;
+  z-index: 11;
+  width: 360px;
+  -webkit-transform: translate(0, -500%);
+  -ms-transform: translate(0, -500%);
+  transform: translate(0, -500%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 10px 20px;
+}
+
+.modal-footer {
+  border-top: #eee solid 1px;
+  text-align: right;
+}
+
+#chouKa {
+  display: flex;
+  margin: 0 auto;
 }
 </style>
