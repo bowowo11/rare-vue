@@ -1,16 +1,16 @@
 <template>
-  <div class="MainInterface">
-    <Portrait></Portrait>
-    <h1>shit</h1>
-    <!-- 轮播图 -->
-    <p id="container">
-    <p id="photo">
-        <img src="../assets/bread.png" />
-        <img src="../assets/bread.png" />
-        <img src="../assets/bread.png" />
-    </p>
-    <!-- 轮播图 -->
-</p>
+  <div class="mainInterface">
+
+    <Portrait id="shit"></Portrait>
+
+
+    <el-carousel :interval="5000"  height="28.5vh" id="rotation">
+    <el-carousel-item v-for="item in img" :key="item.url">
+
+      <img id="pic" :src="item.url" alt="">
+    </el-carousel-item>
+   </el-carousel>
+    
   </div>
   
 </template>
@@ -18,79 +18,41 @@
 // @ is an alias to /src
 import Portrait from '@/components/Portrait.vue'
 
+
 export default {
   name: 'MainInterface',
+  data(){
+    return{
+      img:[
+        {url:require("../assets/lay.png")},
+        {url:require("../assets/pafu.jpg")}
+        ]
+    }
+  },
   components: {
     Portrait
   }
 }
 </script>
 <style scoped>
-/* 轮播图 */
-#container {
-    border: 1px solid black;
-
-    width: 400px;
-
-    height: 300px;
-
-    overflow: hidden;
-
+.mainInterface{
+  background-color: black;
+}
+el-carousel{
+  height:"1000";
+  width: 100%;
 }
 
- 
 
-#photo {
-
-    width: 1200px;
-
-    animation: switch 5s ease-out infinite;
-
+#rotation{
+  direction:vertical;
+  width: 1920px;
+  height: 1080px;
 }
 
- 
-
-#photo > img {
-
-    float: left;
-
-    width: 400px;
-
-    height: 300px;
-
+#shit{
+  width: 50%;
 }
-
- 
-
-@keyframes switch {
-
-    0%, 25% {
-
-        margin-left: 0;
-
-    }
-
-    35%, 60% {
-
-        margin-left: -400px;
-
-    }
-
-    70%, 100% {
-
-        margin-left: -800px;
-
-    }
-
-}
- /* 轮播图 */ 
-  #shit{
-    border: 1px solid black;
-    display: flex;
-    width: 50%;
-    aspect-ratio: 8/1;
-  }
-
 
   
 </style>
