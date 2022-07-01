@@ -7,20 +7,20 @@
           <el-container>
             <el-button type="primary" round id="diamond">钻石：{{ diamond }}</el-button>
             <el-button type="primary" round id="recharge" @click="recharge">充值</el-button>
+            <el-button type="primary" id="tuiChu" circle @click="logout">×</el-button>
           </el-container>
         </el-container>
       </el-header>
       <el-container>
-        <el-aside width="200px">
-          11111111111111
-        </el-aside>
         <el-container>
           <el-main>
-            <el-carousel height="410px">
-              <el-carousel-item v-for="item in imgWrap" :key="item.url">
-                <img :src="item.url" class="picture"/>
-              </el-carousel-item>
-            </el-carousel>
+            <div id="main">
+              <el-carousel height="410px">
+                <el-carousel-item v-for="item in imgWrap" :key="item.url">
+                  <img :src="item.url" class="picture"/>
+                </el-carousel-item>
+              </el-carousel>
+            </div>
           </el-main>
           <el-footer>
             <el-container>
@@ -41,8 +41,8 @@
       <div id="modal-display">
         <div class="modal-body">
           <div class="list">
-            <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
-              <li v-for="i in ur" :key="i" class="infinite-list-item-ur" >{{ i }}</li>
+            <ul class="infinite-list" style="overflow: auto">
+              <li v-for="i in ur" :key="i" class="infinite-list-item-ur">{{ i.name }}</li>
             </ul>
           </div>
         </div>
@@ -68,9 +68,7 @@ export default {
         {url: require("../assets/2.png")},
         {url: require("../assets/1.jpg")}
       ],
-      ur: [
-        1, 2, 3, 4, 5,6,7,8,9,10
-      ],
+      ur: [],
     }
   },
   methods: {
@@ -79,15 +77,25 @@ export default {
     },
     show01() {
       document.getElementById("modal-background").style.display = "flex";
+      fetch('api/single').then(response => response.json()).then(res => {
+        this.ur[0] = res;
+      });
 
     },
     show10() {
       document.getElementById("modal-background").style.display = "flex";
-
+      fetch('api/tencards').then(response => response.json()).then(res => {
+        this.ur = res;
+      });
     },
     nice() {
       document.getElementById("modal-background").style.display = "none";
-
+      this.ur = [];
+    },
+    logout() {
+      this.$router.push({
+        "name": "mainInterface"
+      });
     }
   }
 }
@@ -95,6 +103,10 @@ export default {
 <style scoped>
 .common-layout {
   height: 100%;
+  /*background-size: 100% 100%;*/
+  /*加载背景图*/ /* 背景图不平铺 */
+  background: url("../assets/ChouKaBeiJing.png") no-repeat fixed center center;
+  background-size: cover; /* 让背景图基于容器大小伸缩 */
 }
 
 .el-container {
@@ -102,35 +114,35 @@ export default {
 }
 
 .el-header {
-  background-color: #b3c0d1;
-  color: #333;
+  /*background-color: #b3c0d1;*/
+  /*color: #333;*/
   text-align: center;
   height: 19%;
+  padding-top: 20px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .el-footer {
-  background-color: #b3c0d1;
-  color: #333;
+  /*background-color: #b3c0d1;*/
+  /*color: #333;*/
   text-align: center;
   height: 25%;
 }
 
-.el-aside {
-  background-color: #d3dce6;
-  color: #333;
-  text-align: center;
-  height: 100%;
-}
-
 .el-main {
-  background-color: #e9eef3;
-  color: #333;
+  /*background-color: #e9eef3;*/
+  /*color: #333;*/
   text-align: center;
   height: 75%;
 }
 
-.el-menu {
-  background-color: #d3dce6;
+#main {
+  width: 70%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 #msg {
@@ -149,6 +161,12 @@ export default {
   padding: 0 67px 0 67px;
 }
 
+#tuiChu {
+  text-align: right;
+  size: 18px;
+
+}
+
 .picture {
   width: 80%;
   height: inherit;
@@ -164,8 +182,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 50%;
+}
+
+.triggerBtn {
+  position: absolute;
 }
 
 #modal-background {
