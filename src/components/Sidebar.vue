@@ -20,16 +20,31 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
- #container{
+ /* #container{
   background-color: pink;
   height:80vh;
- }  
- #label{
-  padding: 0px;
-  margin:0px;
-  background-color: black;
-  height:10vh;
-  width: 30px;
+ }   */
+ #container {
 
+  text-align: end;
+  position: fixed;
+  display: block;
+  background-color: grey;
+  width: 300px;
+  height: 600px;
+  transition: transform 200ms ease-in;
+  transform: translateX(calc(-100% + 25px));
+
+
+}
+
+#container:hover {
+  transform: translateX(0px);
+
+}
+ #label{
+  background-color: blueviolet;
+            height: 100%;
+            width: calc(100% - 25px);
  } 
 </style>
