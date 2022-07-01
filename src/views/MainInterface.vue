@@ -1,6 +1,15 @@
 <template>
+  <!-- 侧边栏 -->
+  <div class="sideNav" id="sideNav">
+
+    <div class="sideNav-inner" v-myfor="userInfo">
+    </div>
+
+  </div>
+  <!-- 侧边栏 -->
   <div class="mainInterface">
-    <!-- <Sidebar id="ranking"></Sidebar> -->
+
+
 
     <div id="deck">
 
@@ -45,6 +54,11 @@
       </div>
 
     </div>
+ 
+
+
+
+
 
 
 
@@ -58,6 +72,8 @@
 import Portrait from '@/components/Portrait.vue'
 import Sidebar from '@/components/Sidebar.vue'
 
+// let count = 0;
+
 
 export default {
   name: 'MainInterface',
@@ -67,11 +83,25 @@ export default {
       img: [
         { url: require("../assets/lay.png") },
         { url: require("../assets/pafu.jpg") }
-      ]
+      ],
+      list: [
+        "1",
+        '2',
+        '3'
+      ], userInfo: [
+        { username: "Dick", point: 199 ,},
+        { username: "David", point: 1020 ,},
+        { username: "DD", point: 100 ,}
+      ],
+
     }
   },
   methods: {
-
+    // add(){
+    //     var newp =  document.createElement('div');
+    //     newp.innerHTML = '<p>aaaa</p>'
+    //     document.getElementById("foot").appendChild(newp);
+    //     }
 
   },
   components: {
@@ -84,11 +114,22 @@ export default {
     fetch("api/usr").then(respone => respone.json()).then(data => {
       this.username = data.usrname
     })
+  },
+  directives: {
+    myfor(el, binding) {
+      var arr = binding.value;
+      el.innerHTML = '';
+      for (let i = 0; i < arr.length; i++) {
+        let adiv = document.createElement('div');
+        adiv.innerHTML = '<p>' + arr[i].username + '</p>';
+        el.appendChild(adiv);
+      }
+    }
+    
   }
 
 
 }
-
 
 
 
@@ -168,7 +209,7 @@ ul p:hover {
 
 
 li p {
-  
+
   font-size: 5vh;
   color: black;
 }
@@ -197,4 +238,35 @@ a {
 
 
 
+/* 侧边栏 */
+.sideNav {
+
+  text-align: end;
+  position: fixed;
+  display: block;
+  background-color: grey;
+  width: 300px;
+  height: 2vw;
+  transition: transform 200ms ease-in;
+  transform: translateX(calc(-100% + 2vw));
+  z-index: 100;
+  
+}
+
+.sideNav:hover {
+  transform: translateX(0px);
+
+}
+
+
+.sideNav-inner {
+ 
+  position: fixed;
+  background-color: blueviolet;
+  height: 2000%;
+  width: calc(100% - 2vw);
+  z-index: 100;
+}
+
+/* 侧边栏 */
 </style>

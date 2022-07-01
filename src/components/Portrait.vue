@@ -1,7 +1,7 @@
 <template>
 <div id="portrait">
   <div id="outer">
-    <!-- "../assets/bread.png" -->
+  
     <div id="pic"><img  :src="img" alt=""></div>
     <div id="name"><p>{{username}}</p></div>
   </div>
