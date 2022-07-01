@@ -24,14 +24,12 @@
           </el-main>
           <el-footer>
             <el-container>
-              <div id="chouKa">
-                <div class="wrap">
-                  <button id="triggerBtn">模态框</button>
-                  <button id="triggerBtn">模态框</button>
-<!--                  <a href="#modal-one" class="btn btn-big">来发单抽</a>-->
-<!--                </div>-->
-<!--                <div class="wrap">-->
-<!--                  <a href="#modal-one" class="btn btn-big">直接十连</a>-->
+              <div class="wrap">
+                <div class="wrap-header">
+                  <button class="triggerBtn" @click="show01">来发单抽</button>
+                </div>
+                <div class="wrap-header">
+                  <button class="triggerBtn" @click="show10">直接十连</button>
                 </div>
               </div>
             </el-container>
@@ -39,11 +37,17 @@
         </el-container>
       </el-container>
     </el-container>
-    <div class="modal" id="modal-one" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-body">{{ picture }}</div>
-        <div class="modal-footer">
-          <a href="#" class="btn">Nice!</a>
+    <div id="modal-background">
+      <div id="modal-display">
+        <div class="modal-body">
+          <div class="list">
+            <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
+              <li v-for="i in ur" :key="i" class="infinite-list-item-ur" >{{ i }}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-foot">
+          <button class="triggerBtn" @click="nice">nice！</button>
         </div>
       </div>
     </div>
@@ -63,12 +67,27 @@ export default {
         {url: require("../assets/3.png")},
         {url: require("../assets/2.png")},
         {url: require("../assets/1.jpg")}
-      ]
+      ],
+      ur: [
+        1, 2, 3, 4, 5,6,7,8,9,10
+      ],
     }
   },
   methods: {
     recharge() {
       this.diamond = "1"
+    },
+    show01() {
+      document.getElementById("modal-background").style.display = "flex";
+
+    },
+    show10() {
+      document.getElementById("modal-background").style.display = "flex";
+
+    },
+    nice() {
+      document.getElementById("modal-background").style.display = "none";
+
     }
   }
 }
@@ -131,97 +150,80 @@ export default {
 }
 
 .picture {
-  width: 100%;
+  width: 80%;
   height: inherit;
 }
 
 .wrap {
-  padding: 40px;
-  text-align: center;
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
 
-.btn {
-  background: #428bca;
-  border: #357ebd solid 1px;
-  border-radius: 3px;
-  color: #fff;
-  display: inline-block;
-  font-size: 14px;
-  padding: 8px 15px;
-  text-decoration: none;
-  text-align: center;
-  min-width: 60px;
-  position: relative;
-  transition: color 0.1s ease;
+.wrap-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 50%;
 }
 
-.btn:hover {
-  background: #357ebd;
-}
-
-.btn.btn-big {
-  font-size: 18px;
-  padding: 15px 20px;
-  min-width: 100px;
-}
-
-.modal:before {
-  content: "";
+#modal-background {
   display: none;
-  background: rgba(0, 0, 0, 0.6);
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 10;
+  justify-self: center;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
 }
 
-.modal:target:before {
-  display: block;
-}
-
-.modal:target .modal-dialog {
-  -webkit-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  transform: translate(0, 0);
-  top: 20%;
-}
-
-.modal-dialog {
-  background: #fefefe;
-  border: #333 solid 1px;
-  border-radius: 5px;
-  margin-left: -200px;
-  position: fixed;
-  left: 50%;
-  top: -100%;
-  z-index: 11;
-  width: 360px;
-  -webkit-transform: translate(0, -500%);
-  -ms-transform: translate(0, -500%);
-  transform: translate(0, -500%);
-  -webkit-transition: -webkit-transform 0.3s ease-out;
-  -moz-transition: -moz-transform 0.3s ease-out;
-  -o-transition: -o-transform 0.3s ease-out;
-  transition: transform 0.3s ease-out;
-}
 
 .modal-body {
-  padding: 20px;
+  display: block;
+  width: 80vw;
+  height: 80vh;
+  background-color: #000000;
+  /*background:url("../assets/5.jpg");*/
 }
 
-.modal-footer {
-  padding: 10px 20px;
+.modal-foot {
+  display: block;
+  background-color: #42b983;
+  width: 80vw;
+  height: 10vh;
 }
 
-.modal-footer {
-  border-top: #eee solid 1px;
-  text-align: right;
+#modal-display {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-#chouKa {
+.infinite-list {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.infinite-list .infinite-list-item-ur {
+  border: 5px solid goldenrod;
   display: flex;
-  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  height: 190px;
+  width: 158px;
+  background: var(--el-color-primary-light-9);
+  /*backgrounde: url("3.png");*/
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  margin: 10px;
+  color: var(--el-color-primary);
 }
 </style>
