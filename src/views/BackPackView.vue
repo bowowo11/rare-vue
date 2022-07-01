@@ -15,7 +15,7 @@
              @click="clickmobal($event)"
             />
             <span class="name">{{item.name}}</span>
-            <span class="message">——{{item.description}}</span>
+            <span class="message">{{item.description}}</span>
             <span class="rank">{{rank(item.rareRank)}}</span>
           </div>
           <!-- 卡牌的图片 -->
@@ -74,8 +74,10 @@ export default {
       if(rare == '2') return "SR"
       if(rare == '3') return "UR"
       
-    }
+    },
+
   },
+  
 
   mounted: function () {
     fetch("api/card")
@@ -98,7 +100,6 @@ img {
   height: 200px;
   width: 350px;
   background: var(--el-color-primary-light-9);
-  background-image: url("@/assets/5.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 10px;
@@ -192,15 +193,17 @@ background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%
   width: 1000px;
 }
 .message{
+  font-family: "shaonv";
   text-indent: 5em;
   display: grid;
   position: absolute;
   top: 90%;
   font: 300;
-  font-size: 18px;
+  font-size: 30px;
   color: #000;
 }
 .name{
+  font-family: "name";
   text-indent: 1em;
   text-align:center;
   display: grid;
@@ -211,6 +214,7 @@ background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%
   color: #000;
 }
 .rank{
+  font-family: "english";
   color: aqua;
   position: absolute;
   font-size: 80px;

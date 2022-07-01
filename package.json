@@ -19,6 +19,7 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "less-loader": "^11.0.0",
     "unplugin-auto-import": "^0.9.2",
     "unplugin-vue-components": "^0.20.1"
   },
