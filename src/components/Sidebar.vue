@@ -44,7 +44,7 @@ export default {
 }
  #label{
   background-color: blueviolet;
-            height: 100%;
+            height: 1000px;
             width: calc(100% - 25px);
  } 
 </style>
