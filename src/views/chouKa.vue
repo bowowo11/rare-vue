@@ -62,6 +62,7 @@
     <div id="advertisec">
       <div id="advertise-container">
         <h1 id="advertises">看完广告获得1000钻石</h1>
+
       </div>
     </div>
     <div id="tip">
@@ -107,7 +108,7 @@ export default {
       setTimeout(function () {
         document.getElementById("advertisec").style.display = "none";
       }, 15000),
-          fetch('api/single').then(response => response.json()).then(res => {});
+          fetch('api/charge').then(response => response.json()).then(res => {});
       this.diamond += 1000;
     },
     show01() {
