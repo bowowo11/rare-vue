@@ -1,8 +1,9 @@
 <template>
 <div id="portrait">
   <div id="outer">
-    <div id="pic"><img  src="../assets/bread.png" alt=""></div>
-    <div id="name"><p>用户名</p></div>
+    <!-- "../assets/bread.png" -->
+    <div id="pic"><img  :src="img" alt=""></div>
+    <div id="name"><p>{{username}}</p></div>
   </div>
 </div>
 
@@ -12,7 +13,8 @@
 export default {
   name: 'Portrait',
   props: {
-    msg: String
+    img: String,
+    username:String
   }
 }
 </script>
@@ -24,7 +26,7 @@ export default {
   flex-direction: row;
   padding: 0px;
   margin: 0px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   
 }
