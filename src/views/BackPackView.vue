@@ -3,7 +3,6 @@
     <h1>我的图鉴</h1>
   </div>
   <div class="mode1">
-
     <div class="list">
       <ul class="infinite-list">
         <li v-for="item in imgWrap" :key="item.id">
@@ -12,11 +11,12 @@
             <img
               :src="require('../picture/' + item.id + '.jpg')"
               class="modalimage"
-             @click="clickmobal($event)"
+              @click="clickmobal($event)"
             />
-            <span class="name">{{item.name}}</span>
-            <span class="message">{{item.description}}</span>
-            <span class="rank">{{rank(item.rareRank)}}</span>
+            <span class="name">{{ item.name }}</span>
+            <span class="message">{{ item.description }}</span>
+            <span class="team">{{ item.team }}</span>
+            <span class="rank">{{ rank(item.rareRank) }}</span>
           </div>
           <!-- 卡牌的图片 -->
           <img
@@ -63,21 +63,19 @@ export default {
       } else {
         e.target.parentElement.firstElementChild.style.display = "flex";
       }
+      console.log(e.target);
     },
     //点击模态框图片关闭模态框
-    clickmobal(e){
-      e.target.parentElement.style.display = "none"
+    clickmobal(e) {
+      e.target.parentElement.style.display = "none";
     },
-    rank(rare){
-      console.log(rare)
-      if(rare == '1') return "R"
-      if(rare == '2') return "SR"
-      if(rare == '3') return "UR"
-      
+    rank(rare) {
+      console.log(rare);
+      if (rare == "1") return "R";
+      if (rare == "2") return "SR";
+      if (rare == "3") return "UR";
     },
-
   },
-  
 
   mounted: function () {
     fetch("api/card")
@@ -91,6 +89,44 @@ export default {
 </script>
 
 <style scoped>
+.about {
+  font-family: "name";
+  color: -webkit-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  color: -o-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  color: -ms-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  color: -moz-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  color: linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+}
 img {
   overflow: auto;
   border-radius: 7px;
@@ -106,7 +142,8 @@ img {
   color: var(--el-color-primary);
 }
 p {
-  text-align: left;  height: 100%;
+  text-align: left;
+  height: 100%;
   width: 100%;
   /* height: 200px; */
   /* margin-bottom: 200px; */
@@ -136,7 +173,8 @@ p {
   justify-content: center;
   height: 200px;
   width: 350px;
-  background: var(--el-color-primary-light-9);  height: 100%;
+  background: var(--el-color-primary-light-9);
+  height: 100%;
   width: 100%;
   background-repeat: no-repeat;
   margin: 10px;
@@ -150,6 +188,7 @@ p {
   justify-content: center;
   height: 200px;
   width: 350px;
+  /* 卡牌的背景颜色 */
   background: var(--el-color-primary-light-9);
   background-image: url("@/assets/4.jpg");
   background-size: 100% 100%;
@@ -170,11 +209,41 @@ p {
   width: 50vw;
   left: 25%;
   /*设置为白色背景  前期可以设置为其他颜色  方便观看*/
-  background: -webkit-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
-background: -o-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
-background: -ms-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
-background: -moz-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
-background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
   top: -17%;
   margin-top: 8rem;
   border-radius: 30px;
@@ -184,7 +253,7 @@ background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%
   /*比如在fixed定位中，z-index100大小的会覆盖在50大小的上面*/
   z-index: 111;
 }
-.modalimage{
+.modalimage {
   border: 12px;
   border-radius: 30px;
   margin-top: 10px;
@@ -192,7 +261,7 @@ background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%
   height: 600px;
   width: 1000px;
 }
-.message{
+.message {
   font-family: "shaonv";
   text-indent: 5em;
   display: grid;
@@ -202,10 +271,10 @@ background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%
   font-size: 30px;
   color: #000;
 }
-.name{
+.name {
   font-family: "name";
   text-indent: 1em;
-  text-align:center;
+  text-align: center;
   display: grid;
   position: absolute;
   top: 84%;
@@ -213,15 +282,22 @@ background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%
   font-size: 30px;
   color: #000;
 }
-.rank{
+.rank {
   font-family: "english";
-  color: aqua;
+  color: rgba(56, 255, 215, 0.498);
   position: absolute;
   font-size: 80px;
- top: 3%;
-  left:20px;
+  top: 3%;
+  left: 25px;
   text-align: right;
 }
-
+.team {
+  font-family: "shaonv";
+  color: darkgoldenrod;
+  position: absolute;
+  font-size: 25px;
+  top: 93%;
+  left: 740px;
+}
 </style>
 
