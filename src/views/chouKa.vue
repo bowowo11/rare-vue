@@ -7,7 +7,7 @@
           <el-container>
             <el-button type="primary" round id="diamond" class="btn-primary">钻石：{{ diamond }}</el-button>
             <el-button type="primary" round id="recharge" class="btn-primary" @click="recharge">充值</el-button>
-            <el-button type="primary" id="tuiChu" circle class="btn-primary" @click="logout">×</el-button>
+            <el-button type="primary" circle id="tuiChu" class="btn-primary" @click="logout">×</el-button>
           </el-container>
         </el-container>
       </el-header>
@@ -45,7 +45,7 @@
       <div id="modal-display">
         <div class="modal-body">
           <div class="list">
-            <ul class="infinite-list" style="overflow: auto">
+            <ul class="infinite-list">
               <li v-for="i in ur" :key="i" class="infinite-list-item-ur">
                 <img :src="require('../picture/'+i.id+'.jpg')" class="imgs"/>
               </li>
@@ -57,6 +57,11 @@
             nice
           </el-button>
         </div>
+      </div>
+    </div>
+    <div id="advertisec">
+      <div id="advertise-container">
+        <h1 id="advertises">看完广告获得1000钻石</h1>
       </div>
     </div>
     <div id="tip">
@@ -98,7 +103,12 @@ export default {
   },
   methods: {
     recharge() {
-      this.diamond -= 100000000
+      document.getElementById("advertisec").style.display = "flex";
+      setTimeout(function () {
+        document.getElementById("advertisec").style.display = "none";
+      }, 15000),
+          fetch('api/single').then(response => response.json()).then(res => {});
+      this.diamond += 1000;
     },
     show01() {
       if (this.diamond >= 100) {
@@ -138,9 +148,9 @@ export default {
 }
 </script>
 <style scoped>
+
 .common-layout {
   height: 100%;
-  /*background-size: 100% 100%;*/
   /*加载背景图*/ /* 背景图不平铺 */
   background: url("../assets/ChouKaBeiJing.png") no-repeat fixed center center;
   background-size: cover; /* 让背景图基于容器大小伸缩 */
@@ -151,8 +161,6 @@ export default {
 }
 
 .el-header {
-  /*background-color: #b3c0d1;*/
-  /*color: #333;*/
   text-align: center;
   height: 19%;
   padding-top: 20px;
@@ -228,7 +236,6 @@ export default {
   position: absolute;
   border: 0;
   background: rgba(255, 255, 255, 0);
-
 }
 
 #modal-background {
@@ -253,8 +260,8 @@ export default {
   height: 100vh;
 }
 
-#tip-container{
-  margin:auto;
+#tip-container {
+  margin: auto;
 }
 
 #tips {
@@ -263,11 +270,34 @@ export default {
   color: red;
 }
 
+#advertisec {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-self: center;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+}
+
+#advertise-container {
+  margin: 0 auto auto;
+}
+
+#advertises {
+  /*text-align: center;*/
+  top: 0;
+  font-size: 20px;
+  color: red;
+}
+
 .modal-body {
   display: block;
   width: 70vw;
-  height: 60vh;
-  background-color: #000000;
+  height: 57vh;
+  border-radius: 1em;
+  background-color: #ffffff;
   /*background:url("../assets/5.jpg");*/
 }
 
@@ -314,13 +344,14 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 190px;
-  width: 158px;
+  text-align: center;
+  height: 100%;
+  width: 100%;
   background: var(--el-color-primary-light-9);
   /*backgrounde: url("3.png");*/
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  margin: 10px;
+  /*margin: 10px;*/
   color: var(--el-color-primary);
 }
 
