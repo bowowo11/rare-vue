@@ -74,29 +74,33 @@ export default {
     }
   },
   mounted() {
-    fetch('/api/crystal')
-        .then((res) => {
-          res.json().then((response) => {
-            this.diamond = response;
-          })
-        });
+    fetch('/api/usr')
+        .then((res) =>
+          res.json()).then((response) => {
+            console.log(response);
+            this.diamond = response.crystal;
+            this.msg = response.usrname;
+          });
   },
   methods: {
     recharge() {
       this.diamond -= 1000
     },
     show01() {
-      document.getElementById("modal-background").style.display = "flex";
-      fetch('api/single').then(response => response.json()).then(res => {
-        this.ur[0] = res;
-      });
-
+      if (this.diamond>=90) {
+        document.getElementById("modal-background").style.display = "flex";
+        fetch('api/single').then(response => response.json()).then(res => {
+          this.ur[0] = res;
+        });
+      }
     },
     show10() {
-      document.getElementById("modal-background").style.display = "flex";
-      fetch('api/tencards').then(response => response.json()).then(res => {
-        this.ur = res;
-      });
+      if (this.diamond>=1000) {
+        document.getElementById("modal-background").style.display = "flex";
+        fetch('api/tencards').then(response => response.json()).then(res => {
+          this.ur = res;
+        });
+      }
     },
     nice() {
       document.getElementById("modal-background").style.display = "none";
