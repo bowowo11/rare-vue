@@ -26,10 +26,10 @@
             <el-container>
               <div class="wrap">
                 <div class="wrap-header">
-                  <button class="triggerBtn" @click="show01">来发单抽</button>
+                  <button class="triggerBtn" @click="show01">来发单抽 90</button>
                 </div>
                 <div class="wrap-header">
-                  <button class="triggerBtn" @click="show10">直接十连</button>
+                  <button class="triggerBtn" @click="show10">直接十连 1000</button>
                 </div>
               </div>
             </el-container>
@@ -42,7 +42,9 @@
         <div class="modal-body">
           <div class="list">
             <ul class="infinite-list" style="overflow: auto">
-              <li v-for="i in ur" :key="i" class="infinite-list-item-ur">{{ i.name }}</li>
+              <li v-for="i in ur" :key="i" class="infinite-list-item-ur">
+                <img :src="require('../picture/'+i.id+'.jpg')" class="imgs"/>
+              </li>
             </ul>
           </div>
         </div>
@@ -71,22 +73,34 @@ export default {
       ur: [],
     }
   },
+  mounted() {
+    fetch('/api/usr')
+        .then((res) =>
+          res.json()).then((response) => {
+            console.log(response);
+            this.diamond = response.crystal;
+            this.msg = response.usrname;
+          });
+  },
   methods: {
     recharge() {
-      this.diamond = "1"
+      this.diamond -= 1000
     },
     show01() {
-      document.getElementById("modal-background").style.display = "flex";
-      fetch('api/single').then(response => response.json()).then(res => {
-        this.ur[0] = res;
-      });
-
+      if (this.diamond>=90) {
+        document.getElementById("modal-background").style.display = "flex";
+        fetch('api/single').then(response => response.json()).then(res => {
+          this.ur[0] = res;
+        });
+      }
     },
     show10() {
-      document.getElementById("modal-background").style.display = "flex";
-      fetch('api/tencards').then(response => response.json()).then(res => {
-        this.ur = res;
-      });
+      if (this.diamond>=1000) {
+        document.getElementById("modal-background").style.display = "flex";
+        fetch('api/tencards').then(response => response.json()).then(res => {
+          this.ur = res;
+        });
+      }
     },
     nice() {
       document.getElementById("modal-background").style.display = "none";
@@ -245,6 +259,22 @@ export default {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 10px;
+  color: var(--el-color-primary);
+}
+
+.imgs {
+  overflow: auto;
+  border: 0px solid goldenrod;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 168px;
+  background: var(--el-color-primary-light-9);
+  /*background-image: url("@/assets/5.jpg");*/
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  /*margin: 10px;*/
   color: var(--el-color-primary);
 }
 </style>
