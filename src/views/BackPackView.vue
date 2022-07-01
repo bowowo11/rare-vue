@@ -3,7 +3,6 @@
     <h1>我的图鉴</h1>
   </div>
   <div class="mode1">
-    <p>UR</p>
 
     <div class="list">
       <ul class="infinite-list">
@@ -15,15 +14,15 @@
               class="modalimage"
              @click="clickmobal($event)"
             />
+            <span class="name">{{item.name}}</span>
             <span class="message">{{item.description}}</span>
+            <span class="rank">{{rank(item.rareRank)}}</span>
           </div>
           <!-- 卡牌的图片 -->
           <img
             :src="require('../picture/' + item.id + '.jpg')"
             @click="clickfun($event)"
           />
-
-        
         </li>
       </ul>
     </div>
@@ -68,8 +67,17 @@ export default {
     //点击模态框图片关闭模态框
     clickmobal(e){
       e.target.parentElement.style.display = "none"
-    }
+    },
+    rank(rare){
+      console.log(rare)
+      if(rare == '1') return "R"
+      if(rare == '2') return "SR"
+      if(rare == '3') return "UR"
+      
+    },
+
   },
+  
 
   mounted: function () {
     fetch("api/card")
@@ -85,7 +93,6 @@ export default {
 <style scoped>
 img {
   overflow: auto;
-  border: 5px solid goldenrod;
   border-radius: 7px;
   display: flex;
   align-items: center;
@@ -93,7 +100,6 @@ img {
   height: 200px;
   width: 350px;
   background: var(--el-color-primary-light-9);
-  background-image: url("@/assets/5.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   margin: 10px;
@@ -160,14 +166,18 @@ p {
 .modal-box {
   display: none;
   position: fixed;
-  height: 100vh;
-  width: 53vw;
+  height: 97vh;
+  width: 50vw;
   left: 25%;
   /*设置为白色背景  前期可以设置为其他颜色  方便观看*/
-  background-color:whitesmoke;
-  top: -20%;
+  background: -webkit-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
+background: -o-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
+background: -ms-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
+background: -moz-linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
+background: linear-gradient(45deg, rgb(153, 216, 225) 0%, rgb(190, 193, 221) 43%, rgb(215, 177, 218) 72%, rgb(215, 177, 218) 100%);
+  top: -17%;
   margin-top: 8rem;
-  border-radius: 3px;
+  border-radius: 30px;
   /*解决高度塌陷的问题*/
   overflow: hidden;
   /*z-index 属性设置元素的堆叠顺序。拥有更高堆叠顺序的元素总是会处于堆叠顺序较低的元素的前面*/
@@ -175,20 +185,42 @@ p {
   z-index: 111;
 }
 .modalimage{
-  top: -20px;
-  margin-top: 35px;
-  border: 15px solid goldenrod;
+  border: 12px;
+  border-radius: 30px;
+  margin-top: 10px;
   display: block;
   height: 600px;
   width: 1000px;
 }
 .message{
+  font-family: "shaonv";
+  text-indent: 5em;
   display: grid;
   position: absolute;
-  top: 88%;
+  top: 90%;
   font: 300;
   font-size: 30px;
   color: #000;
+}
+.name{
+  font-family: "name";
+  text-indent: 1em;
+  text-align:center;
+  display: grid;
+  position: absolute;
+  top: 84%;
+  font: 300;
+  font-size: 30px;
+  color: #000;
+}
+.rank{
+  font-family: "english";
+  color: aqua;
+  position: absolute;
+  font-size: 80px;
+ top: 3%;
+  left:20px;
+  text-align: right;
 }
 
 </style>

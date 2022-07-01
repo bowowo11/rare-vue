@@ -5,9 +5,9 @@
         <el-container>
           <div id="msg">个人信息：{{ msg }}</div>
           <el-container>
-            <el-button type="primary" round id="diamond">钻石：{{ diamond }}</el-button>
-            <el-button type="primary" round id="recharge" @click="recharge">充值</el-button>
-            <el-button type="primary" id="tuiChu" circle @click="logout">×</el-button>
+            <el-button type="primary" round id="diamond" class="btn-primary">钻石：{{ diamond }}</el-button>
+            <el-button type="primary" round id="recharge" class="btn-primary" @click="recharge">充值</el-button>
+            <el-button type="primary" id="tuiChu" circle class="btn-primary" @click="logout">×</el-button>
           </el-container>
         </el-container>
       </el-header>
@@ -26,10 +26,14 @@
             <el-container>
               <div class="wrap">
                 <div class="wrap-header">
-                  <button class="triggerBtn" @click="show01">来发单抽 90</button>
+                  <button class="triggerBtn" id="s01" @click="show01">
+                    <img src="../assets/btn1.png" style="width: 70%;height:70%">
+                  </button>
                 </div>
                 <div class="wrap-header">
-                  <button class="triggerBtn" @click="show10">直接十连 1000</button>
+                  <button class="triggerBtn" id="s10" @click="show10">
+                    <img src="../assets/btn10.png" style="width: 70%;height:70%">
+                  </button>
                 </div>
               </div>
             </el-container>
@@ -49,8 +53,18 @@
           </div>
         </div>
         <div class="modal-foot">
-          <button class="triggerBtn" @click="nice">nice！</button>
+          <el-button round @click="nice" id="foot">
+            nice
+          </el-button>
         </div>
+      </div>
+    </div>
+    <div id="tip">
+      <div id="tip-container">
+        <h1 id="tips">钻石不足</h1>
+        <el-button round @click="ok">
+          ok
+        </el-button>
       </div>
     </div>
   </div>
@@ -76,35 +90,44 @@ export default {
   mounted() {
     fetch('/api/usr')
         .then((res) =>
-          res.json()).then((response) => {
-            console.log(response);
-            this.diamond = response.crystal;
-            this.msg = response.usrname;
-          });
+            res.json()).then((response) => {
+      console.log(response);
+      this.diamond = response.crystal;
+      this.msg = response.nickname;
+    });
   },
   methods: {
     recharge() {
-      this.diamond -= 1000
+      this.diamond -= 100000000
     },
     show01() {
-      if (this.diamond>=90) {
+      if (this.diamond >= 100) {
         document.getElementById("modal-background").style.display = "flex";
         fetch('api/single').then(response => response.json()).then(res => {
           this.ur[0] = res;
         });
+        this.diamond -= 90;
+      } else {
+        document.getElementById("tip").style.display = "flex";
       }
     },
     show10() {
-      if (this.diamond>=1000) {
+      if (this.diamond >= 1000) {
         document.getElementById("modal-background").style.display = "flex";
         fetch('api/tencards').then(response => response.json()).then(res => {
           this.ur = res;
         });
+        this.diamond -= 1000;
+      } else {
+        document.getElementById("tip").style.display = "flex";
       }
     },
     nice() {
       document.getElementById("modal-background").style.display = "none";
       this.ur = [];
+    },
+    ok() {
+      document.getElementById("tip").style.display = "none";
     },
     logout() {
       this.$router.push({
@@ -162,6 +185,8 @@ export default {
 #msg {
   text-align: left;
   width: 70%;
+  text-indent: 2em;
+  font-size: 24px;
 }
 
 #diamond {
@@ -201,6 +226,9 @@ export default {
 
 .triggerBtn {
   position: absolute;
+  border: 0;
+  background: rgba(255, 255, 255, 0);
+
 }
 
 #modal-background {
@@ -214,19 +242,53 @@ export default {
   height: 100vh;
 }
 
+#tip {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  justify-self: center;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+}
+
+#tip-container{
+  margin:auto;
+}
+
+#tips {
+  text-align: center;
+  font-size: 120px;
+  color: red;
+}
 
 .modal-body {
   display: block;
-  width: 80vw;
-  height: 80vh;
+  width: 70vw;
+  height: 60vh;
   background-color: #000000;
   /*background:url("../assets/5.jpg");*/
 }
 
 .modal-foot {
-  display: block;
-  background-color: #42b983;
-  width: 80vw;
+  /*display: block;*/
+  background: rgba(225, 225, 225, 0);
+  width: 70vw;
+  height: 10vh;
+  text-align: center;
+  font-size: 30px;
+  position: relative;
+}
+
+#foot {
+  font-size: 20px;
+  margin: 0 auto;
+  border: 2px solid black;
+  background-color: #f7f7f7;
+  justify-content: center;
+  align-items: center;
+  width: 70vw;
   height: 10vh;
 }
 
@@ -271,10 +333,14 @@ export default {
   height: 200px;
   width: 168px;
   background: var(--el-color-primary-light-9);
-  /*background-image: url("@/assets/5.jpg");*/
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  /*margin: 10px;*/
   color: var(--el-color-primary);
 }
+
+.btn-primary {
+  border: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
 </style>
