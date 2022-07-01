@@ -1,66 +1,156 @@
 <template>
+  <div id="register">
   <el-form
       :model="registerForm"
-      ref="loginForm"
-      label-width="0px"
-  ><el-form-item label="" prop="account" style="margin-top: 10px">
+      ref="registerFormRef"
+      label-width="100px"
+      rules="rules"
+  ><el-form-item label="用户名：" prop="username" style="margin-top: 10px">
     <el-row>
-      <el-col :span="2">
-        <span class="el-icon-s-custom"></span>
-      </el-col>
-      <el-col :span="22">
         <el-input
             class="inps"
             placeholder="创建一个用户名"
             v-model="registerForm.username"
         >
         </el-input>
-      </el-col>
+
     </el-row>
   </el-form-item>
-    <el-form-item label="" prop="passWord">
+    <el-form-item label="昵称：" prop="account" style="margin-top: 10px">
       <el-row>
-        <el-col :span="2">
-          <span class="el-icon-lock"></span>
-        </el-col>
-        <el-col :span="22">
+          <el-input
+              class="inps"
+              placeholder="创建一个昵称"
+              v-model="registerForm.account"
+          >
+          </el-input>
+      </el-row>
+    </el-form-item>
+    <el-form-item label="密码：" prop="password">
+      <el-row>
+
           <el-input
               class="inps"
               type="password"
-              placeholder="密码"
+              placeholder="请输入密码"
               v-model="registerForm.password"
           ></el-input>
-        </el-col>
       </el-row>
     </el-form-item>
-    <el-form-item style="margin-top: 55px">
-      <el-button type="primary" round class="submitBtn" @click="submitForm"
+    <el-form-item label="确认密码：" prop="cpPassword">
+      <el-row>
+
+          <el-input
+              class="inps"
+              type="password"
+              placeholder="再次输入密码"
+              v-model="registerForm.cpPassword"
+          ></el-input>
+
+      </el-row>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" round class="submitBtn" @click="submitForm('registerFormRef')"
       >提交
       </el-button>
     </el-form-item>
   </el-form>
+  </div>
 </template>
 
 <script>
+
 export default {
-  name: "register"
-  ,data() {
+
+
+
+  name: "register",
+
+  data() {
     return {
       registerForm:{
         username:'',
+        account:'',
         password:'',
-        cpPassword:''
+        cpPassword:'',
+        errMsg:''
+      },
+      rules:{
+        registerForm:{
+          type: 'object',
+          required: true,
+          fields:{
+            username: [{ required: true, message: '用户名必填', trigger: 'blur' },{message:'用户名必须要有3-10个字母或数字',pattern:/[a-zA-Z1-9]{3,10}/}],
+            account: [{ required: true, message: '昵称必填', trigger: 'blur' },{message: '昵称必须要有1-10个字符',pattern:/\S{1,10}/}],
+            password: [{ required: true, message: '密码必填', trigger: 'blur' },{message: '密码必须由长度6-16个字母或数字组成，至少包含字母、数字',pattern:/^(?=.*[a-zA-Z])(?=.*\d).{6,16}$/}],
+            cpPassword: [{  required: true, trigger: 'blur' },]
+          }
+        }
+
       }
     }
   },
   methods:{
-  submitForm(){
-    
+    submitForm(formName){
+      this.$refs[formName].validate(valid => {
+
+      })
+      const userName = this.registerForm.username;
+      const userPassword = this.registerForm.password;
+      const userCpPassword = this.registerForm.cpPassword;
+      this.checkForm();
+      this.sentForm();
+    },
+  checkForm(){
+    const data={
+    name:this.registerForm.username,
+    username:this.registerForm.account,
   }
+
+    fetch('api/checkname', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }).then(response => response.json()).then(res =>{if(res.errMsg){this.registerForm.errMsg=res.errMsg}else{return this.$message({
+      type: "success",
+      message: "注册中",
+    })}
+    });
+  },
+    sentForm(){
+      const data={
+        username:this.registerForm.username,
+        psw:this.registerForm.password,
+        nickname:this.registerForm.account
+      }
+      fetch('api/sign', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }).then(response => response.json()).then(res =>{if(res.errMsg){this.registerForm.errMsg=res.errMsg}else{this.$router.push('/login')}});
+    }
+
   }
 }
 </script>
 
 <style scoped>
-
+#register {
+  border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  margin: 0px auto;
+  width: 350px;
+  padding: 30px 35px 15px 35px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  text-align: center;
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
+}
 </style>

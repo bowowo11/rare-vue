@@ -1,11 +1,11 @@
 <template>
   <div class="mainInterface">
-    <Sidebar id="ranking"></Sidebar>
+    <!-- <Sidebar id="ranking"></Sidebar> -->
 
     <div id="deck">
 
       <div id="header">
-        <Portrait id="yourhead" :username="username" v-bind:img="require('../assets/bread.png')"></Portrait>
+        <Portrait id="yourhead" :username="username" v-bind:img="require('../assets/鸭.png')"></Portrait>
       </div>
 
       <div id="context">
@@ -45,6 +45,8 @@
       </div>
 
     </div>
+
+
 
 
 
@@ -92,25 +94,6 @@ export default {
 
 </script>
 <style scoped>
-#ranking {
-
-  text-align: end;
-  position: fixed;
-  display: block;
-  background-color: grey;
-  width: 300px;
-  height: 600px;
-  transition: transform 200ms ease-in;
-  transform: translateX(calc(-100% + 25px));
-
-
-}
-
-#ranking:hover {
-  transform: translateX(0px);
-
-}
-
 #yourhead {
   background-color: red;
   width: 30vw;
@@ -176,7 +159,7 @@ export default {
 }
 
 .icon {
-  width: 1em;
+  width: 5vh;
 }
 
 ul p:hover {
@@ -185,6 +168,7 @@ ul p:hover {
 
 
 li p {
+  
   font-size: 5vh;
   color: black;
 }
@@ -210,4 +194,7 @@ li {
 a {
   text-decoration: none;
 }
+
+
+
 </style>

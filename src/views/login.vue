@@ -4,8 +4,9 @@
     <el-form
         :model="loginForm"
         ref="loginForm"
-        label-width="0px"
-    ><el-form-item label="" prop="account" style="margin-top: 10px">
+        label-width="80px"
+        label-position="top"
+    ><el-form-item label="用户名" prop="account" style="margin-top: 10px">
       <el-row>
         <el-col :span="2">
           <span class="el-icon-s-custom"></span>
@@ -13,14 +14,14 @@
         <el-col :span="22">
           <el-input
               class="inps"
-              placeholder="用户名"
+              placeholder="请输入用户名"
               v-model="loginForm.username"
           >
           </el-input>
         </el-col>
       </el-row>
     </el-form-item>
-      <el-form-item label="" prop="passWord">
+      <el-form-item label="密码" prop="passWord">
         <el-row>
           <el-col :span="2">
             <span class="el-icon-lock"></span>
@@ -29,13 +30,13 @@
             <el-input
                 class="inps"
                 type="password"
-                placeholder="密码"
+                placeholder="请输入密码"
                 v-model="loginForm.password"
             ></el-input>
           </el-col>
         </el-row>
       </el-form-item>
-      <el-form-item style="margin-top: 55px">
+      <el-form-item>
         <el-button type="primary" round class="submitBtn" @click="submitForm"
         >登录
         </el-button>
@@ -110,12 +111,16 @@ export default {
 <style scoped>
 #login {
    border-radius: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
    margin: 0px auto;
    width: 350px;
    padding: 30px 35px 15px 35px;
    background: #fff;
    border: 1px solid #eaeaea;
-   text-align: left;
+   text-align: center;
    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.1);
  }
 
