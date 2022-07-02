@@ -1,4 +1,5 @@
 <template>
+  <audio id="audio1" src='https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBa0xtczN5NnpWdEFlUk5MdUp3M05UYTBydGc_ZT1rY3kxQ0Y.mp3' hidden></audio>
   <div class="common-layout">
     <el-container>
       <el-header>
@@ -127,6 +128,7 @@ export default {
       diamond: "",
       msg: "",
       picture: "",
+
       imgWrap: [
         {url: require("../assets/5.jpg")},
         {url: require("../assets/4.jpg")},
@@ -196,6 +198,8 @@ export default {
     },
     nice() {
       document.getElementById("modal-background").style.display = "none";
+
+      document.getElementById("audio1").play();
       this.ur = [];
     },
     ok() {
