@@ -116,6 +116,7 @@ export default {
           message: this.registerForm.errMsg
         })
       } else {
+        console.log("ok");
         this.sentForm();
       }
 

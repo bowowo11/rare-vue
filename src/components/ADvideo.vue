@@ -72,7 +72,6 @@ export default {
     // 开启定时器
     openTimer() {
       this.timer = setInterval(() => {
-        that.$refs.child.src;
         this.$emit("videoStudyTime", this.studyTime);
       }, 5000);
     },

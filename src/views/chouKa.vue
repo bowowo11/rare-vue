@@ -1,9 +1,5 @@
 <template>
-  <audio
-    id="audio1"
-    :src="require('../video/yoxi.mp3')"
-    hidden
-  ></audio>
+  <audio id="audio1" :src="require('../video/yoxi.mp3')" hidden></audio>
   <div class="common-layout">
     <el-container>
       <el-header>
@@ -139,10 +135,13 @@ export default {
       ur: [],
       src: "",
       srcs: [
-        "http://vjs.zencdn.net/v/oceans.mp4",
+        require("../video/32.mp4"),
+        require("../video/bt.mp4"),
+        require("../video/m.mp4"),
+        require("../video/mao.mp4"),
+        require("../video/pp.mp4"),
         require("../video/nainai.mp4"),
       ],
-      
     };
   },
 
