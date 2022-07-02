@@ -3,7 +3,8 @@
   <div id="outer">
     <div id="pic"><img  :src="img" alt="touxiang"></div>
     <div id="personalInfo">
-      <p style="padding-right:4vw">{{username}}</p>
+      <p style="padding-right:7vw">{{username}}</p>   
+      <!-- style="padding-right:4vw"  -->
   </div>
 </div>
 </div>
@@ -54,7 +55,9 @@ img{
   border-radius: 50%;
 
 }
-/* #personalInfo p{
-  background-color:grey;
-} */
+p{
+  font-size: 2.5vh;
+  font-family: genshin;
+}
+
 </style>
