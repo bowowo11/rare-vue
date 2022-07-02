@@ -20,6 +20,7 @@
         </el-col>
         <el-col :span="22">
           <el-input
+          style="margin-left: 0px;width: 110%"
               class="inps"
               placeholder="请输入用户名"
               v-model="loginForm.username"
@@ -35,6 +36,7 @@
           </el-col>
           <el-col :span="22">
             <el-input
+            style="margin-left: 18px;width: 20vm"
                 class="inps"
                 type="password"
                 placeholder="请输入密码"
