@@ -1,4 +1,22 @@
 <template>
+  <div id="page" style="height:1vh" hidden>
+    <div style="width: 100%" class="flex-container column">
+      <video
+        id="video"
+        src="../music/sun.mp3"
+        controls="controls"
+        autoplay="autoplay"
+        loop="loop"
+      ></video>
+      <img
+        id="img"
+        class="play"
+        style="transform: translate(-1584.4%, 121.5%) scale(1)"
+        :src="sound"
+        @click="play()"
+      />
+    </div>
+  </div>
   <div class="about">
     <h1 style="font-size: 100px; color: black">王の宝库</h1>
     <h1 class="fanhui" @click="logout">←</h1>
@@ -165,31 +183,26 @@ export default {
   name: "chouKa",
   data() {
     return {
+      sound: require("../picture/3.jpg"),
       //根据服务器的数据显示
 
       // 接受数据的数组
 
-
-
-
-
-
       imgWrap: [],
-
-
-
-
-
-
-
-
-
-
-
-
     };
   },
   methods: {
+    play() {
+      let vo = document.getElementById("video");
+      if (this.sound == require("../picture/3.jpg")) {
+        this.sound = require("../picture/3.jpg");
+        vo.autoplay = true;
+        vo.play();
+      } else {
+        this.sound = require("../picture/3.jpg");
+        vo.pause();
+      }
+    },
     logout() {
       this.$router.push({
         name: "mainInterface",
@@ -233,9 +246,8 @@ export default {
 </script>
 
 <style scoped>
-
-h1:hover{
-  cursor:default;
+h1:hover {
+  cursor: default;
 }
 .fanhui:hover {
   cursor: pointer;
