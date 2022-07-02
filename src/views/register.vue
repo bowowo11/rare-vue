@@ -177,6 +177,7 @@ export default {
 
 <style scoped>
 #register {
+  font-family:shaonv;
   border-radius: 10px;
   position: absolute;
   left: 50%;
