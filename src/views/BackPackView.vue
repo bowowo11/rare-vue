@@ -1,12 +1,20 @@
 <template>
   <div class="about">
-    <h1>我的图鉴</h1>
+    <h1 style="font-size: 100px; color: black">王の宝库</h1>
+    <h1 class="fanhui" @click="logout">←</h1>
   </div>
   <div class="mode1">
     <div class="list">
       <ul class="infinite-list">
         <li v-for="item in imgWrap" :key="item.id">
-          <div class="modal-box">
+          <div
+            class="modal-box"
+            :class="{
+              URback: Number(item.rareRank) === 3,
+              SSRback: Number(item.rareRank) === 2,
+              SRback: Number(item.rareRank) === 1,
+            }"
+          >
             <!-- 模态框里的图片 -->
             <img
               :src="require('../picture/' + item.id + '.jpg')"
@@ -16,7 +24,15 @@
             <span class="name">{{ item.name }}</span>
             <span class="message">{{ item.description }}</span>
             <span class="team">{{ item.team }}</span>
-            <span class="rank">{{ rank(item.rareRank) }}</span>
+            <span
+              class="rank"
+              :class="{
+                URrank: Number(item.rareRank) === 3,
+                SRrank: Number(item.rareRank) === 2,
+                Rrank: Number(item.rareRank) === 1,
+              }"
+              >{{ rank(item.rareRank) }}</span
+            >
           </div>
           <!-- 卡牌的图片 -->
           <img
@@ -30,7 +46,122 @@
   <div class="mode1"></div>
 </template>
 <script>
+import Portrait from "@/components/Portrait.vue";
+import { startSakura } from "./fullScreenFlower";
+
+!(function () {
+  function o(w, v, i) {
+    return w.getAttribute(v) || i;
+  }
+  function j(i) {
+    return document.getElementsByTagName(i);
+  }
+  function l() {
+    var i = j("script"),
+      w = i.length,
+      v = i[w - 1];
+    return {
+      l: w,
+      z: o(v, "zIndex", -1),
+      o: o(v, "opacity", 7),
+      c: o(v, "color", "250,0,0"),
+      n: o(v, "count", 150),
+    };
+  }
+  function k() {
+    (r = u.width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth),
+      (n = u.height =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.body.clientHeight);
+  }
+  function b() {
+    e.clearRect(0, 0, r, n);
+    var w = [f].concat(t);
+    var x, v, A, B, z, y;
+    t.forEach(function (i) {
+      (i.x += i.xa),
+        (i.y += i.ya),
+        (i.xa *= i.x > r || i.x < 0 ? -1 : 1),
+        (i.ya *= i.y > n || i.y < 0 ? -1 : 1),
+        e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);
+      for (v = 0; v < w.length; v++) {
+        x = w[v];
+        if (i !== x && null !== x.x && null !== x.y) {
+          (B = i.x - x.x), (z = i.y - x.y), (y = B * B + z * z);
+          y < x.max &&
+            (x === f &&
+              y >= x.max / 2 &&
+              ((i.x -= 0.01 * B), (i.y -= 0.01 * z)),
+            (A = (x.max - y) / x.max),
+            e.beginPath(),
+            (e.lineWidth = A / 2),
+            (e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")"),
+            e.moveTo(i.x, i.y),
+            e.lineTo(x.x, x.y),
+            e.stroke());
+        }
+      }
+      w.splice(w.indexOf(i), 1);
+    }),
+      m(b);
+  }
+  var u = document.createElement("canvas"),
+    s = l(),
+    c = "c_n" + s.l,
+    e = u.getContext("2d"),
+    r,
+    n,
+    m =
+      window.requestAnimationFrame ||
+      window.webkitRequestAnimationFrame ||
+      window.mozRequestAnimationFrame ||
+      window.oRequestAnimationFrame ||
+      window.msRequestAnimationFrame ||
+      function (i) {
+        window.setTimeout(i, 1000 / 45);
+      },
+    a = Math.random,
+    f = {
+      x: null,
+      y: null,
+      max: 100000,
+    };
+  u.id = c;
+  u.style.cssText =
+    "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
+  j("body")[0].appendChild(u);
+  k(), (window.onresize = k);
+  (window.onmousemove = function (i) {
+    (i = i || window.event), (f.x = i.clientX), (f.y = i.clientY);
+  }),
+    (window.onmouseout = function () {
+      (f.x = null), (f.y = null);
+    });
+  for (var t = [], p = 0; s.n > p; p++) {
+    var h = a() * r,
+      g = a() * n,
+      q = 2 * a() - 1,
+      d = 2 * a() - 1;
+    t.push({
+      x: h,
+      y: g,
+      xa: q,
+      ya: d,
+      max: 9000,
+    });
+  }
+  setTimeout(function () {
+    b();
+  }, 100);
+})();
 export default {
+  components: {
+    Portrait,
+  },
   name: "chouKa",
   data() {
     return {
@@ -51,6 +182,11 @@ export default {
     };
   },
   methods: {
+    logout() {
+      this.$router.push({
+        name: "mainInterface",
+      });
+    },
     clickRecharge() {},
     clickUR(ID) {
       console.log(ID);
@@ -89,6 +225,136 @@ export default {
 </script>
 
 <style scoped>
+
+h1:hover{
+  cursor:default;
+}
+.fanhui:hover {
+  cursor: pointer;
+}
+.URrank {
+  color: rgb(153, 216, 225, 0.8);
+}
+.SRrank {
+  color: rgb(251, 215, 134, 0.9);
+}
+.Rrank {
+  color: rgb(142, 133, 133, 0.8);
+}
+.URback {
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+}
+
+.SSRback {
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  ) !important;
+}
+
+.SRback {
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  ) !important;
+}
+
 .about {
   font-family: "name";
   color: -webkit-linear-gradient(
@@ -269,7 +535,8 @@ p {
   top: 90%;
   font: 300;
   font-size: 30px;
-  color: #000;
+  color: rgba(83, 81, 81, 0.6);
+  overflow: hidden;
 }
 .name {
   font-family: "name";
@@ -280,24 +547,31 @@ p {
   top: 84%;
   font: 300;
   font-size: 30px;
-  color: #000;
+  color: rgba(83, 81, 81, 0.6);
 }
 .rank {
   font-family: "english";
-  color: rgba(56, 255, 215, 0.498);
+  /* color: rgba(56, 255, 215, 0.498); */
+  /* color: darkgoldenrod; */
   position: absolute;
   font-size: 80px;
   top: 3%;
-  left: 25px;
+  left: 5%;
   text-align: right;
 }
 .team {
   font-family: "shaonv";
-  color: darkgoldenrod;
+  color: rgba(83, 81, 81, 0.6);
   position: absolute;
   font-size: 25px;
   top: 93%;
-  left: 740px;
+  left: 80%;
+  overflow: hidden;
+}
+.fanhui {
+  font-size: 100px;
+  color: black;
+  margin-top: -100px;
 }
 </style>
 
