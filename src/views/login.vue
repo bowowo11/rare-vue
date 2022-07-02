@@ -1,7 +1,14 @@
 
 <template>
+  <div id="page">
+    <div style="width: 100%" class="flex-container column">
+      <video id="video" src="../music/Volare.mp3" controls="controls" autoplay="autoplay"  loop="loop"> </video>
+      <img  id="img" class="play" style="transform: translate(-1584.4%, 121.5%) scale(1)" :src="sound" @click="play()">
+    </div>
+  </div>
   <div id="login">
-    <el-form
+    <audio id="audio" loop preload="auto" :src='require("../music/Volare.mp3")'>111</audio>
+    <el-formn
         :model="loginForm"
         ref="loginForm"
         label-width="80px"
@@ -37,17 +44,13 @@
         </el-row>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" round class="submitBtn" @click="submitForm"
+        <el-button auto-insert-space="auto-insert-space" type="primary"  class="submitBtn" @click="submitForm"
         >登录
         </el-button>
+        <el-button @click="register" >注册新账号</el-button>
       </el-form-item>
-      <div class="unlogin">
-    
-        <router-link :to="{ path: '/register' }">
-          <a href="register.vue" target="_blank" >注册新账号</a>
-        </router-link>
-      </div>
-    </el-form>
+  
+    </el-formn>
   </div>
 </template>
 
@@ -139,7 +142,8 @@ export default {
       loginForm:{
         username:"",
         password:"",
-        errMsg:""
+        errMsg:"",
+        sound: require('../picture/3.jpg')
       }
     }
   }
@@ -147,6 +151,17 @@ export default {
     startSakura()
   }
   ,methods:{
+    play() {
+      let vo = document.getElementById("video")
+      if (this.sound == require('../picture/3.jpg')) {
+        this.sound = require('../picture/3.jpg')
+        vo.autoplay = true
+        vo.play()
+      } else {
+        this.sound = require('../picture/3.jpg')
+        vo.pause()
+      }
+    },register(){this.$router.push('/register')},
     submitForm() {
       const userAccount = this.loginForm.username;
       const userPassword = this.loginForm.password;
