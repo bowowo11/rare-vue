@@ -44,16 +44,12 @@
         </el-row>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" round class="submitBtn" @click="submitForm"
+        <el-button auto-insert-space="auto-insert-space" type="primary"  class="submitBtn" @click="submitForm"
         >登录
         </el-button>
+        <el-button @click="register" >注册新账号</el-button>
       </el-form-item>
-      <div class="unlogin">
-    
-        <router-link :to="{ path: '/register' }">
-          <a href="register.vue" target="_blank" >注册新账号</a>
-        </router-link>
-      </div>
+  
     </el-formn>
   </div>
 </template>
@@ -165,7 +161,7 @@ export default {
         this.sound = require('../picture/3.jpg')
         vo.pause()
       }
-    },
+    },register(){this.$router.push('/register')},
     submitForm() {
       const userAccount = this.loginForm.username;
       const userPassword = this.loginForm.password;
