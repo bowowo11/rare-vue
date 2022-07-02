@@ -29,7 +29,6 @@
                 @click="play()">
             </div>
           </div>
-
           <!-- 音乐 -->
         </div>
 
