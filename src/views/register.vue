@@ -48,7 +48,7 @@
         </el-row>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" round class="submitBtn" @click="submitForm('registerFormRef')"
+        <el-button type="primary" class="submitBtn" @click="submitForm('registerFormRef')"
         >提交
         </el-button>
       </el-form-item>
@@ -116,7 +116,7 @@ export default {
           message: this.registerForm.errMsg
         })
       } else {
-        // this.sentForm();
+        this.sentForm();
       }
 
 
