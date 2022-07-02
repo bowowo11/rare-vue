@@ -1,12 +1,19 @@
 <template>
   <div class="about">
-    <h1>我的图鉴</h1>
+    <h1 style="font-size:80px;">我的图鉴</h1>
   </div>
   <div class="mode1">
     <div class="list">
       <ul class="infinite-list">
         <li v-for="item in imgWrap" :key="item.id">
-          <div class="modal-box">
+          <div
+            class="modal-box"
+            :class="{
+              URback: Number(item.rareRank) === 3,
+              SSRback: Number(item.rareRank) === 2,
+              SRback: Number(item.rareRank) === 1,
+            }"
+          >
             <!-- 模态框里的图片 -->
             <img
               :src="require('../picture/' + item.id + '.jpg')"
@@ -16,7 +23,15 @@
             <span class="name">{{ item.name }}</span>
             <span class="message">{{ item.description }}</span>
             <span class="team">{{ item.team }}</span>
-            <span class="rank">{{ rank(item.rareRank) }}</span>
+            <span
+              class="rank"
+              :class="{
+                URrank: Number(item.rareRank) === 3,
+                SRrank: Number(item.rareRank) === 2,
+                Rrank: Number(item.rareRank) === 1,
+              }"
+              >{{ rank(item.rareRank) }}</span
+            >
           </div>
           <!-- 卡牌的图片 -->
           <img
@@ -30,7 +45,11 @@
   <div class="mode1"></div>
 </template>
 <script>
+import Portrait from '@/components/Portrait.vue'
 export default {
+    components: {
+    Portrait
+  },
   name: "chouKa",
   data() {
     return {
@@ -89,6 +108,129 @@ export default {
 </script>
 
 <style scoped>
+.URrank {
+color: rgb( 153, 216, 225,0.8);
+}
+.SRrank {
+  color: rgb(251, 215, 134,0.9);
+}
+.Rrank {
+  color:rgb(142, 133, 133,0.8);
+}
+.URback {
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
+  );
+}
+
+.SSRback {
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
+  ) !important;
+}
+
+.SRback {
+  background: -webkit-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: -o-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: -ms-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: -moz-linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  );
+  background: linear-gradient(
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
+  ) !important;
+}
+
 .about {
   font-family: "name";
   color: -webkit-linear-gradient(
@@ -269,7 +411,8 @@ p {
   top: 90%;
   font: 300;
   font-size: 30px;
-  color: #000;
+  color:rgba(83, 81, 81, 0.6);
+  overflow: hidden;
 }
 .name {
   font-family: "name";
@@ -280,24 +423,26 @@ p {
   top: 84%;
   font: 300;
   font-size: 30px;
-  color: #000;
+  color:rgba(83, 81, 81, 0.6);
 }
 .rank {
   font-family: "english";
-  color: rgba(56, 255, 215, 0.498);
+  /* color: rgba(56, 255, 215, 0.498); */
+  /* color: darkgoldenrod; */
   position: absolute;
   font-size: 80px;
   top: 3%;
-  left: 25px;
+  left: 5%;
   text-align: right;
 }
 .team {
   font-family: "shaonv";
-  color: darkgoldenrod;
+  color:rgba(83, 81, 81, 0.6);
   position: absolute;
   font-size: 25px;
   top: 93%;
-  left: 740px;
+  left: 80%;
+  overflow: hidden;
 }
 </style>
 
