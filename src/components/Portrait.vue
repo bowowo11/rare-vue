@@ -23,7 +23,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#portrait，#outer,#pic,img{
+#portrait,#outer,#pic,img{
   border-radius: 50%;
 }
 #outer{
