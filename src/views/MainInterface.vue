@@ -24,7 +24,7 @@
           <!-- 音乐 -->
           <div id="page">
             <div style="width: 100%" class="flex-container column">
-              <video id="video" src="../music/Volare.mp3" controls="controls" autoplay="autoplay" loop="loop"> </video>
+              <video id="video" src="../music/Butter-Fly.mp3" controls="controls" autoplay="autoplay" loop="loop"> </video>
               <img id="img" class="play" style="transform: translate(-1584.4%, 121.5%) scale(1)" :src="sound"
                 @click="play()">
             </div>
