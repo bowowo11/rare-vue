@@ -378,6 +378,8 @@ export default {
 
 #msg {
   margin-left: 25px;
+  font-size: 30px;
+  color: white;
 }
 
 #diamond {
@@ -572,6 +574,7 @@ export default {
 }
 
 #msg-container {
+
   margin-left: 30px;
   justify-content: right;
 }

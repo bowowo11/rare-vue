@@ -3,7 +3,7 @@
   <div id="outer">
     <div id="pic"><img  :src="img" alt="touxiang"></div>
     <div id="personalInfo">
-      <p style="padding-right:7vw">{{username}}</p>   
+      <p>&emsp;&emsp;{{username}}</p>
       <!-- style="padding-right:4vw"  -->
   </div>
 </div>
@@ -58,6 +58,7 @@ img{
 p{
   font-size: 2.5vh;
   font-family: genshin;
+  text-align: left;
 }
 
 </style>

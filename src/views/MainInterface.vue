@@ -1,17 +1,18 @@
 <template>
-    <div>
-       <!-- 侧边栏 -->
-  <div class="sideNav" id="sideNav">
 
-    <div class="sideNav-inner" v-myfor="userInfo">
+
+  <div>
+    <!-- 侧边栏 -->
+    <div class="sideNav" id="sideNav">
+
+      <div class="sideNav-inner" v-myfor="userInfo">
+      </div>
+
     </div>
-
-  </div>
-  <!-- 侧边栏 -->
-  <div class="mainInterface">
+    <!-- 侧边栏 -->
+    <div class="mainInterface">
 
       <div id="deck">
-
         <!-- <div id="mainBack">
     <img src="../assets/mainbackground1.png" alt="">
       </div> -->
@@ -19,6 +20,17 @@
 
         <div id="header">
           <Portrait id="yourhead" :username="username" v-bind:img="require('../assets/鸭.png')"></Portrait>
+
+          <!-- 音乐 -->
+          <div id="page">
+            <div style="width: 100%" class="flex-container column">
+              <video id="video" src="../music/Butter-Fly.mp3" controls="controls" autoplay="autoplay" loop="loop"> </video>
+              <img id="img" class="play" style="transform: translate(-1584.4%, 121.5%) scale(1)" :src="sound"
+                @click="play()">
+            </div>
+          </div>
+
+          <!-- 音乐 -->
         </div>
 
         <div id="context">
@@ -77,7 +89,7 @@
 // @ is an alias to /src
 import Portrait from '@/components/Portrait.vue'
 import Sidebar from '@/components/Sidebar.vue'
-import {startSakura} from"./fullScreenFlower"
+import { startSakura } from "./fullScreenFlower"
 
 ! function () {
   function o(w, v, i) {
@@ -88,8 +100,8 @@ import {startSakura} from"./fullScreenFlower"
   }
   function l() {
     var i = j("script"),
-        w = i.length,
-        v = i[w - 1];
+      w = i.length,
+      v = i[w - 1];
     return {
       l: w,
       z: o(v, "zIndex", -1),
@@ -118,18 +130,18 @@ import {startSakura} from"./fullScreenFlower"
     }), m(b)
   }
   var u = document.createElement("canvas"),
-      s = l(),
-      c = "c_n" + s.l,
-      e = u.getContext("2d"),
-      r, n, m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
-        window.setTimeout(i, 1000 / 45)
-      },
-      a = Math.random,
-      f = {
-        x: null,
-        y: null,
-        max: 100000
-      };
+    s = l(),
+    c = "c_n" + s.l,
+    e = u.getContext("2d"),
+    r, n, m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
+      window.setTimeout(i, 1000 / 45)
+    },
+    a = Math.random,
+    f = {
+      x: null,
+      y: null,
+      max: 100000
+    };
   u.id = c;
   u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
   j("body")[0].appendChild(u);
@@ -141,9 +153,9 @@ import {startSakura} from"./fullScreenFlower"
   };
   for (var t = [], p = 0; s.n > p; p++) {
     var h = a() * r,
-        g = a() * n,
-        q = 2 * a() - 1,
-        d = 2 * a() - 1;
+      g = a() * n,
+      q = 2 * a() - 1,
+      d = 2 * a() - 1;
     t.push({
       x: h,
       y: g,
@@ -180,16 +192,23 @@ export default {
         { username: "Dick", point: 199, },
         { username: "David", point: 1020, },
         { username: "DD", point: 100, }
-      ]
+      ],
+      sound: require('../picture/3.jpg')
 
     }
   },
   methods: {
-    // add(){
-    //     var newp =  document.createElement('div');
-    //     newp.innerHTML = '<p>aaaa</p>'
-    //     document.getElementById("foot").appendChild(newp);
-    //     }
+    play() {
+      let vo = document.getElementById("video")
+      if (this.sound == require('../picture/3.jpg')) {
+        this.sound = require('../picture/3.jpg')
+        vo.autoplay = true
+        vo.play()
+      } else {
+        this.sound = require('../picture/3.jpg')
+        vo.pause()
+      }
+    }
 
   },
   components: {
@@ -213,7 +232,7 @@ export default {
       for (let i = 0; i < arr.length; i++) {
         let adiv = document.createElement('div');
         let rank = i + 1;
-        adiv.innerHTML = '<div style="display:flex;justify-content:space-evenly">' +'<div><p>'+ '第' + rank + '名' + '</p></div>' + '<div><p>'+arr[i].nickname+'</p></div>' + '<div><p>' + arr[i].score +'</p></div>' +'</div>';
+        adiv.innerHTML = '<div style="display:flex;justify-content:space-evenly;padding:0px;margin:0px;font-family:genshin">' + '<div style-"padding:0px;margin:0px;"><p="padding:0px;margin:0px;">' + '第' + rank + '名' + '</p></div>' + '<div style="padding:0px;margin:0px;"><p style="padding:0px;margin:0px;">' + arr[i].nickname + '</p></div>' + '<div style="padding:0px;margin:0px;"><p style="padding:0px;margin:0px;">' + arr[i].score + '</p></div>' + '</div>';
         el.appendChild(adiv);
       }
     }
@@ -227,7 +246,15 @@ export default {
 
 </script>
 <style scoped>
-
+#header{
+  display:flex;
+  flex-direction: row;
+}
+#page{
+  padding: 0px;
+  margin:0px;
+  height:5vh;
+}
 /* #mainBack{
   position:absolute;
   width: 20px;
@@ -239,7 +266,7 @@ export default {
   justify-content: center;
   align-content: center;
 } */
-#nav{
+#nav {
   display: flex;
   justify-content: center;
 }
@@ -265,7 +292,8 @@ export default {
   align-content: center;
   align-items: center;
   text-align: center;
-  background-image: url(../assets/头部剪影.png);
+  background-image: url(../assets/主页面背景.png);
+  background-repeat: no-repeat;
 
 }
 
@@ -282,7 +310,7 @@ export default {
 
 
 
-  background: #f7f7f7;
+  background: rgba(255, 255, 255, 0.5);
   -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 
@@ -300,7 +328,7 @@ export default {
 
 #context {
   display: flex;
-  
+
   flex: auto;
   justify-content: space-evenly;
   z-index: 3;
@@ -398,7 +426,6 @@ a {
 
 .sideNav:hover {
   transform: translateX(0px);
-  
 
 }
 
@@ -413,6 +440,8 @@ a {
 
 
   text-align: center;
+
+  border-bottom-right-radius: 25px;
 }
 
 /* 侧边栏 */
