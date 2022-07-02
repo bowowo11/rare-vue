@@ -166,19 +166,27 @@ export default {
   data() {
     return {
       //根据服务器的数据显示
-      ur: [{ name: 1, rank: "ur", image: "3.png" }, 1, 2, 3, 4, 5],
-      sr: [
-        { name: 1, rank: "ur", image: "@/assets/5.jpg" },
-        { name: 22, rank: "ur" },
-        3,
-        4,
-        5,
-        6,
-        7,
-      ],
-      r: [1, 2, 3, 4, 5],
+
       // 接受数据的数组
-      imgWrap: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 15 }],
+
+
+
+
+
+
+      imgWrap: [],
+
+
+
+
+
+
+
+
+
+
+
+
     };
   },
   methods: {
@@ -471,7 +479,7 @@ p {
 .modal-box {
   display: none;
   position: fixed;
-  height: 97vh;
+  height: 80vh;
   width: 50vw;
   left: 25%;
   /*设置为白色背景  前期可以设置为其他颜色  方便观看*/
@@ -511,7 +519,7 @@ p {
     rgb(215, 177, 218) 100%
   );
   top: -17%;
-  margin-top: 8rem;
+  margin-top: 12rem;
   border-radius: 30px;
   /*解决高度塌陷的问题*/
   overflow: hidden;
@@ -524,8 +532,8 @@ p {
   border-radius: 30px;
   margin-top: 10px;
   display: block;
-  height: 600px;
-  width: 1000px;
+  height: 80%;
+  width: 100%;
 }
 .message {
   font-family: "shaonv";
@@ -565,7 +573,7 @@ p {
   position: absolute;
   font-size: 25px;
   top: 93%;
-  left: 80%;
+  left: 70%;
   overflow: hidden;
 }
 .fanhui {
