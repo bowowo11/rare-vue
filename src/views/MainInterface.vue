@@ -9,9 +9,17 @@
   <!-- 侧边栏 -->
   <div class="mainInterface">
 
+  
+  
 
+    <div>
 
-    <div id="deck">
+<div id="deck">
+
+      <!-- <div id="mainBack">
+    <img src="../assets/mainbackground1.png" alt="">
+      </div> -->
+
 
       <div id="header">
         <Portrait id="yourhead" :username="username" v-bind:img="require('../assets/鸭.png')"></Portrait>
@@ -20,7 +28,7 @@
       <div id="context">
 
         <div id="rotation">
-          <el-carousel :interval="5000" height="50vh">
+          <el-carousel :interval="5000" height="40vh">
             <el-carousel-item v-for="item in img" :key="item.url">
               <img id="pic" :src="item.url" alt="">
             </el-carousel-item>
@@ -52,6 +60,8 @@
         </div>
 
       </div>
+
+    </div>
 
     </div>
  
@@ -107,8 +117,7 @@ export default {
 
   },
   components: {
-    Portrait,
-    Sidebar
+    Portrait
   },
 
   mounted: function () {
@@ -142,16 +151,19 @@ export default {
 
 </script>
 <style scoped>
+/* #mainBack{
+  position:absolute;
+  width: 20px;
+  z-index: 2;
+} */
 #yourhead {
-  background-color: red;
-  width: 30vw;
+  background-color: rgba(0, 0, 0, 0.5);
+   width: 30vw;
   border-top-left-radius: calc(0.5*0.25*30vw);
   border-top-right-radius: 25px;
   border-bottom-left-radius: calc(0.5*0.25*30vw);
   border-bottom-right-radius: 25px;
   margin: 1%;
-
-
 }
 
 .mainInterface {
@@ -175,21 +187,33 @@ export default {
 
 
 
+
+
+
   background: #f7f7f7;
   -webkit-box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+
+  z-index: 1;
+
+  background-image: url(../assets/哎嘿.png);
+  background-image: url(../assets/gameTitle.png);
+  background-repeat: no-repeat;
+  background-position: 20vw 20px;
 }
 
 #context {
   display: flex;
   justify-content: space-around;
   flex: auto;
+
+  z-index: 3;
 }
 
 #rotation {
-  width: 50vw;
+  width: 30vw;
   direction: vertical;
-  height: 50vh;
+  height: 30vh;
 
   border: 1px solid black;
 
@@ -206,6 +230,7 @@ export default {
   padding: 0px;
   margin: 0px;
 
+width: 30vw;
   border-radius: 25px;
 }
 
