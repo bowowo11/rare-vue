@@ -3,7 +3,7 @@
   <div id="outer">
     <div id="pic"><img  :src="img" alt="touxiang"></div>
     <div id="personalInfo">
-      <p>&emsp;&emsp;{{username}}</p>   
+      <p>&emsp;&emsp;{{username}}</p>
       <!-- style="padding-right:4vw"  -->
   </div>
 </div>
