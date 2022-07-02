@@ -24,6 +24,14 @@
               @click="logout"
               >×</el-button
             >
+          <div id="msg">
+            <!--            个人信息：{{ msg }}-->
+            <Portrait :username="msg" id="yourhead" v-bind:img="require('../assets/鸭.png')"></Portrait>
+          </div>
+          <el-container id="msg-container">
+            <el-button type="primary" round id="diamond" class="btn-primary">钻石：{{ diamond }}</el-button>
+            <el-button type="primary" round id="recharge" class="btn-primary" @click="recharge">充值</el-button>
+            <el-button type="primary" circle id="tuiChu" class="btn-primary" @click="logout">×</el-button>
           </el-container>
         </el-container>
       </el-header>
@@ -33,7 +41,7 @@
             <div id="main">
               <el-carousel height="410px">
                 <el-carousel-item v-for="item in imgWrap" :key="item.url">
-                  <img :src="item.url" class="picture" />
+                  <img :src="item.url" class="picture"/>
                 </el-carousel-item>
               </el-carousel>
             </div>
@@ -43,18 +51,12 @@
               <div class="wrap">
                 <div class="wrap-header">
                   <button class="triggerBtn" id="s01" @click="show01">
-                    <img
-                      src="../assets/btn1.png"
-                      style="width: 70%; height: 70%"
-                    />
+                    <img src="../assets/btn1.png" style="width: 70%;height:70%">
                   </button>
                 </div>
                 <div class="wrap-header">
                   <button class="triggerBtn" id="s10" @click="show10">
-                    <img
-                      src="../assets/btn10.png"
-                      style="width: 70%; height: 70%"
-                    />
+                    <img src="../assets/btn10.png" style="width: 70%;height:70%">
                   </button>
                 </div>
               </div>
@@ -68,17 +70,17 @@
         <div class="modal-body">
           <div class="list">
             <ul class="infinite-list">
-              <li v-for="i in ur" :key="i" class="infinite-list-item-ur">
-                <img
-                  :src="require('../picture/' + i.id + '.jpg')"
-                  class="imgs"
-                />
+              <li v-for="i in ur" :key="i" class="infinite-list-item-ur"
+                  :class="{'URback':Number(i.rareRank)===3,'SSRback':Number(i.rareRank)===2,'SRback':Number(i.rareRank)===1}">
+                <img :src="require('../picture/'+i.id+'.jpg')" class="imgs"/>
               </li>
             </ul>
           </div>
         </div>
         <div class="modal-foot">
-          <el-button round @click="nice" id="foot"> nice </el-button>
+          <el-button round @click="nice" id="foot">
+            nice
+          </el-button>
         </div>
       </div>
     </div>
@@ -91,27 +93,32 @@
     <div id="tip">
       <div id="tip-container">
         <h1 id="tips">钻石不足</h1>
-        <el-button round @click="ok"> ok </el-button>
+        <el-button round @click="ok">
+          ok
+        </el-button>
       </div>
     </div>
   </div>
 </template>
 <script>
 import ADvideo from "@/components/ADvideo.vue";
+import Portrait from '@/components/Portrait.vue'
+
 export default {
-  components: { ADvideo },
+  components: { ADvideo ,Portrait},
+
   name: "chouKa",
   data() {
     return {
-      diamond: "111111111111",
-      msg: "小熊",
+      diamond: "",
+      msg: "",
       picture: "",
       imgWrap: [
-        { url: require("../assets/5.jpg") },
-        { url: require("../assets/4.jpg") },
-        { url: require("../assets/3.png") },
-        { url: require("../assets/2.png") },
-        { url: require("../assets/1.jpg") },
+        {url: require("../assets/5.jpg")},
+        {url: require("../assets/4.jpg")},
+        {url: require("../assets/3.png")},
+        {url: require("../assets/2.png")},
+        {url: require("../assets/1.jpg")}
       ],
       ur: [],
       src: "",
@@ -126,30 +133,35 @@ export default {
         this.diamond = response.crystal;
         this.msg = response.nickname;
       });
+  created() {
+    fetch('/api/usr')
+        .then((res) =>
+            res.json()).then((response) => {
+      console.log(response);
+      this.diamond = response.crystal;
+      this.msg = response.nickname;
+    });
   },
   methods: {
     selectSource() {
       return this.srcs[Math.floor(Math.random() * this.srcs.length)];
     },
     recharge() {
-      this.selectSource();
+      this.selectSource();fetch('api/charge').then(response => response.json()).then(res => {
       document.getElementById("advertisec").style.display = "flex";
       setTimeout(function () {
         document.getElementById("advertisec").style.display = "none";
       }, 15000),
-        fetch("api/charge")
-          .then((response) => response.json())
-          .then((res) => {});
+          fetch('api/charge').then(response => response.json()).then(res => {
+          });
       this.diamond += 1000;
     },
     show01() {
       if (this.diamond >= 100) {
         document.getElementById("modal-background").style.display = "flex";
-        fetch("api/single")
-          .then((response) => response.json())
-          .then((res) => {
-            this.ur[0] = res;
-          });
+        fetch('api/single').then(response => response.json()).then(res => {
+          this.ur[0] = res;
+        });
         this.diamond -= 90;
       } else {
         document.getElementById("tip").style.display = "flex";
@@ -158,11 +170,9 @@ export default {
     show10() {
       if (this.diamond >= 1000) {
         document.getElementById("modal-background").style.display = "flex";
-        fetch("api/tencards")
-          .then((response) => response.json())
-          .then((res) => {
-            this.ur = res;
-          });
+        fetch('api/tencards').then(response => response.json()).then(res => {
+          this.ur = res;
+        });
         this.diamond -= 1000;
       } else {
         document.getElementById("tip").style.display = "flex";
@@ -177,14 +187,27 @@ export default {
     },
     logout() {
       this.$router.push({
-        name: "mainInterface",
+        "name": "mainInterface"
       });
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style scoped>
+.URback {
+  background: black !important;
+}
+
+.SSRback {
+  background: aqua !important;
+}
+
+.SRback {
+  background: greenyellow !important;
+}
+
 .common-layout {
+  font-family: shaonv, serif;
   height: 100%;
   /*加载背景图*/ /* 背景图不平铺 */
   background: url("../assets/ChouKaBeiJing.png") no-repeat fixed center center;
@@ -226,10 +249,7 @@ export default {
 }
 
 #msg {
-  text-align: left;
-  width: 70%;
-  text-indent: 2em;
-  font-size: 24px;
+  margin-left: 25px;
 }
 
 #diamond {
@@ -246,6 +266,7 @@ export default {
 #tuiChu {
   text-align: right;
   size: 18px;
+
 }
 
 .picture {
@@ -404,7 +425,24 @@ export default {
 }
 
 .btn-primary {
+  font-size: 25px;
+  font-family: shaonv, serif;
   border: 0;
   background: rgba(0, 0, 0, 0.5);
+}
+
+#yourhead {
+  width: 30vw;
+  border-top-left-radius: calc(0.5 * 0.25 * 30vw);
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: calc(0.5 * 0.25 * 30vw);
+  border-bottom-right-radius: 25px;
+  margin: 1%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#msg-container {
+  margin-left: 30px;
+  justify-content: right;
 }
 </style>
