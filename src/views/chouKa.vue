@@ -3,8 +3,11 @@
     <el-container>
       <el-header>
         <el-container>
-          <div id="msg">个人信息：{{ msg }}</div>
-          <el-container>
+          <div id="msg">
+            <!--            个人信息：{{ msg }}-->
+            <Portrait :username="msg" id="yourhead" v-bind:img="require('../assets/鸭.png')"></Portrait>
+          </div>
+          <el-container id="msg-container">
             <el-button type="primary" round id="diamond" class="btn-primary">钻石：{{ diamond }}</el-button>
             <el-button type="primary" round id="recharge" class="btn-primary" @click="recharge">充值</el-button>
             <el-button type="primary" circle id="tuiChu" class="btn-primary" @click="logout">×</el-button>
@@ -46,7 +49,8 @@
         <div class="modal-body">
           <div class="list">
             <ul class="infinite-list">
-              <li v-for="i in ur" :key="i" class="infinite-list-item-ur">
+              <li v-for="i in ur" :key="i" class="infinite-list-item-ur"
+                  :class="{'URback':Number(i.rareRank)===3,'SSRback':Number(i.rareRank)===2,'SRback':Number(i.rareRank)===1}">
                 <img :src="require('../picture/'+i.id+'.jpg')" class="imgs"/>
               </li>
             </ul>
@@ -76,12 +80,17 @@
   </div>
 </template>
 <script>
+import Portrait from '@/components/Portrait.vue'
+
 export default {
+  components: {
+    Portrait
+  },
   name: "chouKa",
   data() {
     return {
-      diamond: "111111111111",
-      msg: "小熊",
+      diamond: "",
+      msg: "",
       picture: "",
       imgWrap: [
         {url: require("../assets/5.jpg")},
@@ -93,7 +102,7 @@ export default {
       ur: [],
     }
   },
-  mounted() {
+  created() {
     fetch('/api/usr')
         .then((res) =>
             res.json()).then((response) => {
@@ -108,7 +117,8 @@ export default {
       setTimeout(function () {
         document.getElementById("advertisec").style.display = "none";
       }, 15000),
-          fetch('api/charge').then(response => response.json()).then(res => {});
+          fetch('api/charge').then(response => response.json()).then(res => {
+          });
       this.diamond += 1000;
     },
     show01() {
@@ -149,8 +159,20 @@ export default {
 }
 </script>
 <style scoped>
+.URback {
+  background: black !important;
+}
+
+.SSRback {
+  background: aqua !important;
+}
+
+.SRback {
+  background: greenyellow !important;
+}
 
 .common-layout {
+  font-family: shaonv, serif;
   height: 100%;
   /*加载背景图*/ /* 背景图不平铺 */
   background: url("../assets/ChouKaBeiJing.png") no-repeat fixed center center;
@@ -192,14 +214,12 @@ export default {
 }
 
 #msg {
-  text-align: left;
-  width: 70%;
-  text-indent: 2em;
-  font-size: 24px;
+  margin-left: 25px;
 }
 
 #diamond {
   text-align: right;
+  margin-right: 15px;
 }
 
 #recharge {
@@ -212,7 +232,7 @@ export default {
 #tuiChu {
   text-align: right;
   size: 18px;
-
+  margin-right: 20px;
 }
 
 .picture {
@@ -371,8 +391,24 @@ export default {
 }
 
 .btn-primary {
+  font-size: 25px;
+  font-family: shaonv, serif;
   border: 0;
   background: rgba(0, 0, 0, 0.5);
 }
 
+#yourhead {
+  width: 30vw;
+  border-top-left-radius: calc(0.5 * 0.25 * 30vw);
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: calc(0.5 * 0.25 * 30vw);
+  border-bottom-right-radius: 25px;
+  margin: 1%;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+#msg-container {
+  margin-left: 30px;
+  justify-content: right;
+}
 </style>
