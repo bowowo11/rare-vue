@@ -333,7 +333,7 @@ export default {
   font-family: genshin, serif;
   height: 100%;
   /*加载背景图*/ /* 背景图不平铺 */
-  background: url("../assets/ChouKaBeiJing.png") no-repeat fixed center center;
+  background: url("../assets/抽卡背景.png") no-repeat fixed center center;
   background-size: cover; /* 让背景图基于容器大小伸缩 */
 }
 
@@ -563,7 +563,7 @@ export default {
   border-bottom-left-radius: calc(0.5 * 0.25 * 30vw);
   border-bottom-right-radius: 25px;
   margin: 1%;
-  background: rgba(0, 0, 0, 0.5);
+  /*background: rgba(0, 0, 0, 0.5);*/
 }
 
 #msg-container {
