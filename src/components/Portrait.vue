@@ -54,7 +54,7 @@ img{
   
 }
 #personalInfo{
-  flex:3;
+  flex:4;
   border-radius: 50%;
   
 }
