@@ -2,9 +2,14 @@
 <div id="portrait">
   <div id="outer">
   
-    <div id="pic"><img  :src="img" alt=""></div>
-    <div id="name"><p>{{username}}</p></div>
+    <div id="pic"><img  :src="img" alt="touxiang"></div>
+    <div id="personalInfo">
+      <p>{{username}}</p>
+      <div>
+        <p>12{{rank}}</p>
+      </div>
   </div>
+</div>
 </div>
 
 </template>
@@ -14,7 +19,8 @@ export default {
   name: 'Portrait',
   props: {
     img: String,
-    username:String
+    username:String,
+    rank:String
   }
 }
 </script>
@@ -22,7 +28,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 #portrait，#outer,#pic,img{
-  border-radius: 25px;
+  border-radius: 50%;
 }
 #outer{
   display: flex;
@@ -31,18 +37,28 @@ export default {
   margin: 0px;
   /* border: 1px solid black; */
   width: 100%;
+  /* background-color: red; */
   
 }
 #pic{
     flex:1;
-    border-radius: 25px;
-    border: 1px solid black;
+    border-radius: 50%;
+    border: 2px solid black;
+    background-color: white;
+    
+    
 }
 img{
   width: 100%;
   height: 100%;
+  
 }
-#name{
+#personalInfo{
   flex:3;
+  border-radius: 50%;
+  
 }
+/* #personalInfo p{
+  background-color:grey;
+} */
 </style>

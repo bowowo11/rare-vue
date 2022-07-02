@@ -81,18 +81,20 @@ export default {
     return {
       username: "123",
       img: [
-        { url: require("../assets/lay.png") },
-        { url: require("../assets/pafu.jpg") }
+        { url: require("../assets/抽卡甜心.jpg") },
+        { url: require("../assets/女子高中生.jpg") },
+        { url: require("../assets/A组.jpg") }
       ],
       list: [
         "1",
         '2',
         '3'
-      ], userInfo: [
+      ], 
+      userInfo: [
         { username: "Dick", point: 199 ,},
         { username: "David", point: 1020 ,},
         { username: "DD", point: 100 ,}
-      ],
+      ]
 
     }
   },
@@ -112,8 +114,12 @@ export default {
   mounted: function () {
 
     fetch("api/usr").then(respone => respone.json()).then(data => {
-      this.username = data.usrname
+      this.username = data.nickname;
     })
+    fetch("api/usrRank").then(respone => respone.json()).then(data => {
+      this.userInfo = data;
+    })
+    
   },
   directives: {
     myfor(el, binding) {
@@ -121,7 +127,8 @@ export default {
       el.innerHTML = '';
       for (let i = 0; i < arr.length; i++) {
         let adiv = document.createElement('div');
-        adiv.innerHTML = '<p>' + arr[i].username + '</p>';
+        let rank = i+1;
+        adiv.innerHTML = '<p>' +'第'+ rank +'名'+" "+ arr[i].nickname+" "+arr[i].score+ '</p>';
         el.appendChild(adiv);
       }
     }
@@ -138,7 +145,10 @@ export default {
 #yourhead {
   background-color: red;
   width: 30vw;
-  border-radius: 25px;
+  border-top-left-radius: calc(0.5*0.25*30vw);
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: calc(0.5*0.25*30vw);
+  border-bottom-right-radius: 25px;
   margin: 1%;
 
 
@@ -199,6 +209,9 @@ export default {
   border-radius: 25px;
 }
 
+#pic img{
+  border-radius: 25px;
+}
 .icon {
   width: 5vh;
 }
@@ -212,6 +225,7 @@ li p {
 
   font-size: 5vh;
   color: black;
+  font-family: "english";
 }
 
 router-link-active {
@@ -262,7 +276,7 @@ a {
 .sideNav-inner {
  
   position: fixed;
-  background-color: blueviolet;
+  background-color: red;
   height: 2000%;
   width: calc(100% - 2vw);
   z-index: 100;
