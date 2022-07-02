@@ -183,7 +183,7 @@ export default {
           .then((res) => {
             this.ur[0] = res;
           });
-        this.diamond -= 90;
+        this.diamond -= 100;
       } else {
         document.getElementById("tip").style.display = "flex";
       }
