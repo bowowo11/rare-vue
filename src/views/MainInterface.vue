@@ -9,62 +9,62 @@
   <!-- 侧边栏 -->
   <div class="mainInterface">
 
-  
-  
+
+
 
     <div>
 
-<div id="deck">
+      <div id="deck">
 
-      <!-- <div id="mainBack">
+        <!-- <div id="mainBack">
     <img src="../assets/mainbackground1.png" alt="">
       </div> -->
 
 
-      <div id="header">
-        <Portrait id="yourhead" :username="username" v-bind:img="require('../assets/鸭.png')"></Portrait>
-      </div>
-
-      <div id="context">
-
-        <div id="rotation">
-          <el-carousel :interval="5000" height="40vh">
-            <el-carousel-item v-for="item in img" :key="item.url">
-              <img id="pic" :src="item.url" alt="">
-            </el-carousel-item>
-          </el-carousel>
+        <div id="header">
+          <Portrait id="yourhead" :username="username" v-bind:img="require('../assets/鸭.png')"></Portrait>
         </div>
 
+        <div id="context">
 
-        <div id="nav">
-          <ul>
-            <li>
-              <p>BATTLE</p>
-            </li>
-            <li>
-              <router-link to="/backPack">
-                <p>STOCK</p>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/chouKa">
-                <p><img class="icon" src="../assets/头部剪影.png">SHOP</p>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="/login">
-                <p>EXIT</p>
-              </router-link>
-            </li>
-          </ul>
+          <div id="rotation">
+            <el-carousel :interval="5000" height="50vh">
+              <el-carousel-item v-for="item in img" :key="item.url">
+                <img id="pic" :src="item.url" alt="">
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+
+
+          <div id="nav">
+            <ul>
+              <li>
+                <p>BATTLE</p>
+              </li>
+              <li>
+                <router-link to="/backPack">
+                  <p>STOCK</p>
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/chouKa">
+                  <p><img class="icon" src="../assets/头部剪影.png">SHOP</p>
+                </router-link>
+              </li>
+              <li>
+                <router-link to="/login">
+                  <p>EXIT</p>
+                </router-link>
+              </li>
+            </ul>
+          </div>
+
         </div>
 
       </div>
 
     </div>
 
-    </div>
- 
 
 
 
@@ -99,11 +99,11 @@ export default {
         "1",
         '2',
         '3'
-      ], 
+      ],
       userInfo: [
-        { username: "Dick", point: 199 ,},
-        { username: "David", point: 1020 ,},
-        { username: "DD", point: 100 ,}
+        { username: "Dick", point: 199, },
+        { username: "David", point: 1020, },
+        { username: "DD", point: 100, }
       ]
 
     }
@@ -128,7 +128,7 @@ export default {
     fetch("api/usrRank").then(respone => respone.json()).then(data => {
       this.userInfo = data;
     })
-    
+
   },
   directives: {
     myfor(el, binding) {
@@ -136,12 +136,12 @@ export default {
       el.innerHTML = '';
       for (let i = 0; i < arr.length; i++) {
         let adiv = document.createElement('div');
-        let rank = i+1;
-        adiv.innerHTML = '<p>' +'第'+ rank +'名'+" "+ arr[i].nickname+" "+arr[i].score+ '</p>';
+        let rank = i + 1;
+        adiv.innerHTML = '<p>' + '第' + rank + '名' + " " + arr[i].nickname + " " + arr[i].score + '</p>';
         el.appendChild(adiv);
       }
     }
-    
+
   }
 
 
@@ -156,9 +156,12 @@ export default {
   width: 20px;
   z-index: 2;
 } */
+
+
+
 #yourhead {
   background-color: rgba(0, 0, 0, 0.5);
-   width: 30vw;
+  width: 20vw;
   border-top-left-radius: calc(0.5*0.25*30vw);
   border-top-right-radius: 25px;
   border-bottom-left-radius: calc(0.5*0.25*30vw);
@@ -199,21 +202,24 @@ export default {
   background-image: url(../assets/哎嘿.png);
   background-image: url(../assets/gameTitle.png);
   background-repeat: no-repeat;
-  background-position: 20vw 20px;
+  background-position: 7vw 50vh;
 }
 
 #context {
   display: flex;
-  justify-content: space-around;
+  
   flex: auto;
-
+  justify-content: space-around;
   z-index: 3;
 }
 
 #rotation {
-  width: 30vw;
+  padding: 0px;
+  margin: 0px;
+
+  width: 50vw;
   direction: vertical;
-  height: 30vh;
+  height: 50vh;
 
   border: 1px solid black;
 
@@ -230,13 +236,14 @@ export default {
   padding: 0px;
   margin: 0px;
 
-width: 30vw;
+  width: 50vw;
   border-radius: 25px;
 }
 
-#pic img{
+#pic img {
   border-radius: 25px;
 }
+
 .icon {
   width: 5vh;
 }
@@ -289,7 +296,7 @@ a {
   transition: transform 200ms ease-in;
   transform: translateX(calc(-100% + 2vw));
   z-index: 100;
-  
+
 }
 
 .sideNav:hover {
@@ -299,7 +306,7 @@ a {
 
 
 .sideNav-inner {
- 
+
   position: fixed;
   background-color: red;
   height: 2000%;
