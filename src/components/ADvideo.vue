@@ -29,6 +29,7 @@ export default {
       },
       timer: {}, // 定时器
       pauseTimer: {}, // 暂停定时器
+      src: "",
     };
   },
   /**
@@ -39,11 +40,6 @@ export default {
    * @param videoData 视频基础数据
    */
   props: {
-    src: {
-      type: String,
-      required: true,
-       default: "",
-    },
     poster: {
       type: String,
       required: false,
@@ -52,7 +48,7 @@ export default {
     controls: {
       type: Boolean,
       required: false,
-      default:false,
+      default: false,
     },
     control: {
       type: Boolean,
@@ -76,6 +72,7 @@ export default {
     // 开启定时器
     openTimer() {
       this.timer = setInterval(() => {
+        that.$refs.child.src;
         this.$emit("videoStudyTime", this.studyTime);
       }, 5000);
     },
@@ -141,6 +138,10 @@ export default {
 </script>
 
 <style lang="less">
+video {
+  max-height: 60vh;
+  max-width: 80vw;
+}
 #common-video {
   position: relative;
   .video-box {
