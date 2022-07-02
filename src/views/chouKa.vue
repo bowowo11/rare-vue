@@ -1,14 +1,18 @@
 <template>
-  <audio id="audio1" src='https://link.jscdn.cn/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBa0xtczN5NnpWdEFlUk5MdUp3M05UYTBydGc_ZT1rY3kxQ0Y.mp3' hidden></audio>
+  <audio
+    id="audio1"
+    :src="require('../video/yoxi.mp3')"
+    hidden
+  ></audio>
   <div class="common-layout">
     <el-container>
       <el-header>
         <el-container>
           <div id="msg">
             <Portrait
-                :username="msg"
-                id="yourhead"
-                v-bind:img="require('../assets/鸭.png')"
+              :username="msg"
+              id="yourhead"
+              v-bind:img="require('../assets/鸭.png')"
             ></Portrait>
           </div>
           <el-container id="msg-container">
@@ -138,6 +142,7 @@ export default {
         "http://vjs.zencdn.net/v/oceans.mp4",
         require("../video/nainai.mp4"),
       ],
+      
     };
   },
 
@@ -217,115 +222,115 @@ export default {
 <style scoped>
 .URback {
   background: -webkit-linear-gradient(
-      45deg,
-      rgb(153, 216, 225) 0%,
-      rgb(190, 193, 221) 43%,
-      rgb(215, 177, 218) 72%,
-      rgb(215, 177, 218) 100%
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
   );
   background: -o-linear-gradient(
-      45deg,
-      rgb(153, 216, 225) 0%,
-      rgb(190, 193, 221) 43%,
-      rgb(215, 177, 218) 72%,
-      rgb(215, 177, 218) 100%
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
   );
   background: -ms-linear-gradient(
-      45deg,
-      rgb(153, 216, 225) 0%,
-      rgb(190, 193, 221) 43%,
-      rgb(215, 177, 218) 72%,
-      rgb(215, 177, 218) 100%
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
   );
   background: -moz-linear-gradient(
-      45deg,
-      rgb(153, 216, 225) 0%,
-      rgb(190, 193, 221) 43%,
-      rgb(215, 177, 218) 72%,
-      rgb(215, 177, 218) 100%
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
   );
   background: linear-gradient(
-      45deg,
-      rgb(153, 216, 225) 0%,
-      rgb(190, 193, 221) 43%,
-      rgb(215, 177, 218) 72%,
-      rgb(215, 177, 218) 100%
+    45deg,
+    rgb(153, 216, 225) 0%,
+    rgb(190, 193, 221) 43%,
+    rgb(215, 177, 218) 72%,
+    rgb(215, 177, 218) 100%
   ) !important;
 }
 
 .SRback {
   background: -webkit-linear-gradient(
-      45deg,
-      rgb(131, 164, 212) 0%,
-      rgb(131, 164, 212) 50%,
-      rgb(131, 164, 212) 51%,
-      rgb(182, 251, 255) 100%
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
   );
   background: -o-linear-gradient(
-      45deg,
-      rgb(131, 164, 212) 0%,
-      rgb(131, 164, 212) 50%,
-      rgb(131, 164, 212) 51%,
-      rgb(182, 251, 255) 100%
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
   );
   background: -ms-linear-gradient(
-      45deg,
-      rgb(131, 164, 212) 0%,
-      rgb(131, 164, 212) 50%,
-      rgb(131, 164, 212) 51%,
-      rgb(182, 251, 255) 100%
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
   );
   background: -moz-linear-gradient(
-      45deg,
-      rgb(131, 164, 212) 0%,
-      rgb(131, 164, 212) 50%,
-      rgb(131, 164, 212) 51%,
-      rgb(182, 251, 255) 100%
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
   );
   background: linear-gradient(
-      45deg,
-      rgb(131, 164, 212) 0%,
-      rgb(131, 164, 212) 50%,
-      rgb(131, 164, 212) 51%,
-      rgb(182, 251, 255) 100%
+    45deg,
+    rgb(131, 164, 212) 0%,
+    rgb(131, 164, 212) 50%,
+    rgb(131, 164, 212) 51%,
+    rgb(182, 251, 255) 100%
   ) !important;
 }
 
 .SSRback {
   background: -webkit-linear-gradient(
-      45deg,
-      rgb(251, 215, 134) 0%,
-      rgb(251, 215, 134) 50%,
-      rgb(251, 215, 134) 54%,
-      rgb(247, 121, 125) 100%
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
   );
   background: -o-linear-gradient(
-      45deg,
-      rgb(251, 215, 134) 0%,
-      rgb(251, 215, 134) 50%,
-      rgb(251, 215, 134) 54%,
-      rgb(247, 121, 125) 100%
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
   );
   background: -ms-linear-gradient(
-      45deg,
-      rgb(251, 215, 134) 0%,
-      rgb(251, 215, 134) 50%,
-      rgb(251, 215, 134) 54%,
-      rgb(247, 121, 125) 100%
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
   );
   background: -moz-linear-gradient(
-      45deg,
-      rgb(251, 215, 134) 0%,
-      rgb(251, 215, 134) 50%,
-      rgb(251, 215, 134) 54%,
-      rgb(247, 121, 125) 100%
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
   );
   background: linear-gradient(
-      45deg,
-      rgb(251, 215, 134) 0%,
-      rgb(251, 215, 134) 50%,
-      rgb(251, 215, 134) 54%,
-      rgb(247, 121, 125) 100%
+    45deg,
+    rgb(251, 215, 134) 0%,
+    rgb(251, 215, 134) 50%,
+    rgb(251, 215, 134) 54%,
+    rgb(247, 121, 125) 100%
   ) !important;
 }
 
