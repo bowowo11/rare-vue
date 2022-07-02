@@ -12,23 +12,26 @@
           </div>
           <el-container id="msg-container">
             <el-button type="primary" round id="diamond" class="btn-primary"
-              >钻石：{{ diamond }}</el-button
+            >钻石：{{ diamond }}
+            </el-button
             >
             <el-button
-              type="primary"
-              round
-              id="recharge"
-              class="btn-primary"
-              @click="recharge"
-              >充值</el-button
+                type="primary"
+                round
+                id="recharge"
+                class="btn-primary"
+                @click="recharge"
+            >充值
+            </el-button
             >
             <el-button
-              type="primary"
-              circle
-              id="tuiChu"
-              class="btn-primary"
-              @click="logout"
-              >×</el-button
+                type="primary"
+                circle
+                id="tuiChu"
+                class="btn-primary"
+                @click="logout"
+            >×
+            </el-button
             >
           </el-container>
         </el-container>
@@ -39,7 +42,7 @@
             <div id="main">
               <el-carousel height="410px">
                 <el-carousel-item v-for="item in imgWrap" :key="item.url">
-                  <img :src="item.url" class="picture" />
+                  <img :src="item.url" class="picture"/>
                 </el-carousel-item>
               </el-carousel>
             </div>
@@ -50,16 +53,16 @@
                 <div class="wrap-header">
                   <button class="triggerBtn" id="s01" @click="show01">
                     <img
-                      src="../assets/btn1.png"
-                      style="width: 70%; height: 70%"
+                        src="../assets/btn1.png"
+                        style="width: 70%; height: 70%"
                     />
                   </button>
                 </div>
                 <div class="wrap-header">
                   <button class="triggerBtn" id="s10" @click="show10">
                     <img
-                      src="../assets/btn10.png"
-                      style="width: 70%; height: 70%"
+                        src="../assets/btn10.png"
+                        style="width: 70%; height: 70%"
                     />
                   </button>
                 </div>
@@ -75,25 +78,25 @@
           <div class="list">
             <ul class="infinite-list">
               <li
-                v-for="i in ur"
-                :key="i"
-                class="infinite-list-item-ur"
-                :class="{
+                  v-for="i in ur"
+                  :key="i"
+                  class="infinite-list-item-ur"
+                  :class="{
                   URback: Number(i.rareRank) === 3,
                   SSRback: Number(i.rareRank) === 2,
                   SRback: Number(i.rareRank) === 1,
                 }"
               >
                 <img
-                  :src="require('../picture/' + i.id + '.jpg')"
-                  class="imgs"
+                    :src="require('../picture/' + i.id + '.jpg')"
+                    class="imgs"
                 />
               </li>
             </ul>
           </div>
         </div>
         <div class="modal-foot">
-          <el-button round @click="nice" id="foot"> nice </el-button>
+          <el-button round @click="nice" id="foot"> nice</el-button>
         </div>
       </div>
     </div>
@@ -106,7 +109,7 @@
     <div id="tip">
       <div id="tip-container">
         <h1 id="tips">钻石不足</h1>
-        <el-button round @click="ok"> ok </el-button>
+        <el-button round @click="ok"> ok</el-button>
       </div>
     </div>
   </div>
@@ -116,7 +119,7 @@ import ADvideo from "@/components/ADvideo.vue";
 import Portrait from "@/components/Portrait.vue";
 
 export default {
-  components: { ADvideo, Portrait },
+  components: {ADvideo, Portrait},
 
   name: "chouKa",
   data() {
@@ -125,11 +128,11 @@ export default {
       msg: "",
       picture: "",
       imgWrap: [
-        { url: require("../assets/5.jpg") },
-        { url: require("../assets/4.jpg") },
-        { url: require("../assets/3.png") },
-        { url: require("../assets/2.png") },
-        { url: require("../assets/1.jpg") },
+        {url: require("../assets/5.jpg")},
+        {url: require("../assets/4.jpg")},
+        {url: require("../assets/3.png")},
+        {url: require("../assets/2.png")},
+        {url: require("../assets/1.jpg")},
       ],
       ur: [],
       src: "",
@@ -139,12 +142,12 @@ export default {
 
   created() {
     fetch("/api/usr")
-      .then((res) => res.json())
-      .then((response) => {
-        console.log(response);
-        this.diamond = response.crystal;
-        this.msg = response.nickname;
-      });
+        .then((res) => res.json())
+        .then((response) => {
+          console.log(response);
+          this.diamond = response.crystal;
+          this.msg = response.nickname;
+        });
   },
   methods: {
     selectSource() {
@@ -159,20 +162,20 @@ export default {
       setTimeout(function () {
         that.$refs.child.operateVideo();
       }, 1000),
-        setTimeout(function () {
-          document.getElementById("advertisec").style.display = "none";
-          that.$refs.child.operateVideo();
-        }, 15000),
-        (this.diamond += 1000);
+          setTimeout(function () {
+            document.getElementById("advertisec").style.display = "none";
+            that.$refs.child.operateVideo();
+          }, 15000),
+          (this.diamond += 1000);
     },
     show01() {
       if (this.diamond >= 100) {
         document.getElementById("modal-background").style.display = "flex";
         fetch("api/single")
-          .then((response) => response.json())
-          .then((res) => {
-            this.ur[0] = res;
-          });
+            .then((response) => response.json())
+            .then((res) => {
+              this.ur[0] = res;
+            });
         this.diamond -= 90;
       } else {
         document.getElementById("tip").style.display = "flex";
@@ -182,10 +185,10 @@ export default {
       if (this.diamond >= 1000) {
         document.getElementById("modal-background").style.display = "flex";
         fetch("api/tencards")
-          .then((response) => response.json())
-          .then((res) => {
-            this.ur = res;
-          });
+            .then((response) => response.json())
+            .then((res) => {
+              this.ur = res;
+            });
         this.diamond -= 1000;
       } else {
         document.getElementById("tip").style.display = "flex";
@@ -242,7 +245,7 @@ export default {
       rgb(190, 193, 221) 43%,
       rgb(215, 177, 218) 72%,
       rgb(215, 177, 218) 100%
-  );
+  ) !important;
 }
 
 .SRback {
