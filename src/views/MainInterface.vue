@@ -13,7 +13,6 @@
     <div class="mainInterface">
 
       <div id="deck">
-
         <!-- <div id="mainBack">
     <img src="../assets/mainbackground1.png" alt="">
       </div> -->
