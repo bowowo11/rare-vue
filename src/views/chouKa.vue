@@ -5,9 +5,9 @@
         <el-container>
           <div id="msg">
             <Portrait
-              :username="msg"
-              id="yourhead"
-              v-bind:img="require('../assets/鸭.png')"
+                :username="msg"
+                id="yourhead"
+                v-bind:img="require('../assets/鸭.png')"
             ></Portrait>
           </div>
           <el-container id="msg-container">
@@ -100,7 +100,7 @@
     <div id="advertisec">
       <div id="advertise-container">
         <h1 id="advertises">看完广告获得1000钻石</h1>
-        <ADvideo :src="src"></ADvideo>
+        <ADvideo :src="src" ref="child"></ADvideo>
       </div>
     </div>
     <div id="tip">
@@ -133,7 +133,7 @@ export default {
       ],
       ur: [],
       src: "",
-      srcs: [],
+      srcs: ["http://vjs.zencdn.net/v/oceans.mp4"],
     };
   },
 
@@ -148,22 +148,22 @@ export default {
   },
   methods: {
     selectSource() {
-      return this.srcs[Math.floor(Math.random() * this.srcs.length)];
+      this.src = this.srcs[Math.floor(Math.random() * this.srcs.length)];
+      console.log(this.src);
     },
     recharge() {
       this.selectSource();
-      fetch("api/charge")
-        .then((response) => response.json())
-        .then((res) => {
-          document.getElementById("advertisec").style.display = "flex";
-          setTimeout(function () {
-            document.getElementById("advertisec").style.display = "none";
-          }, 15000),
-            fetch("api/charge")
-              .then((response) => response.json())
-              .then((res) => {});
-          this.diamond += 1000;
-        });
+      fetch("api/charge");
+      document.getElementById("advertisec").style.display = "flex";
+      let that = this;
+      setTimeout(function () {
+        that.$refs.child.operateVideo();
+      }, 1000),
+        setTimeout(function () {
+          document.getElementById("advertisec").style.display = "none";
+          that.$refs.child.operateVideo();
+        }, 15000),
+        (this.diamond += 1000);
     },
     show01() {
       if (this.diamond >= 100) {
@@ -208,19 +208,121 @@ export default {
 </script>
 <style scoped>
 .URback {
-  background: black !important;
-}
-
-.SSRback {
-  background: aqua !important;
+  background: -webkit-linear-gradient(
+      45deg,
+      rgb(153, 216, 225) 0%,
+      rgb(190, 193, 221) 43%,
+      rgb(215, 177, 218) 72%,
+      rgb(215, 177, 218) 100%
+  );
+  background: -o-linear-gradient(
+      45deg,
+      rgb(153, 216, 225) 0%,
+      rgb(190, 193, 221) 43%,
+      rgb(215, 177, 218) 72%,
+      rgb(215, 177, 218) 100%
+  );
+  background: -ms-linear-gradient(
+      45deg,
+      rgb(153, 216, 225) 0%,
+      rgb(190, 193, 221) 43%,
+      rgb(215, 177, 218) 72%,
+      rgb(215, 177, 218) 100%
+  );
+  background: -moz-linear-gradient(
+      45deg,
+      rgb(153, 216, 225) 0%,
+      rgb(190, 193, 221) 43%,
+      rgb(215, 177, 218) 72%,
+      rgb(215, 177, 218) 100%
+  );
+  background: linear-gradient(
+      45deg,
+      rgb(153, 216, 225) 0%,
+      rgb(190, 193, 221) 43%,
+      rgb(215, 177, 218) 72%,
+      rgb(215, 177, 218) 100%
+  );
 }
 
 .SRback {
-  background: greenyellow !important;
+  background: -webkit-linear-gradient(
+      45deg,
+      rgb(131, 164, 212) 0%,
+      rgb(131, 164, 212) 50%,
+      rgb(131, 164, 212) 51%,
+      rgb(182, 251, 255) 100%
+  );
+  background: -o-linear-gradient(
+      45deg,
+      rgb(131, 164, 212) 0%,
+      rgb(131, 164, 212) 50%,
+      rgb(131, 164, 212) 51%,
+      rgb(182, 251, 255) 100%
+  );
+  background: -ms-linear-gradient(
+      45deg,
+      rgb(131, 164, 212) 0%,
+      rgb(131, 164, 212) 50%,
+      rgb(131, 164, 212) 51%,
+      rgb(182, 251, 255) 100%
+  );
+  background: -moz-linear-gradient(
+      45deg,
+      rgb(131, 164, 212) 0%,
+      rgb(131, 164, 212) 50%,
+      rgb(131, 164, 212) 51%,
+      rgb(182, 251, 255) 100%
+  );
+  background: linear-gradient(
+      45deg,
+      rgb(131, 164, 212) 0%,
+      rgb(131, 164, 212) 50%,
+      rgb(131, 164, 212) 51%,
+      rgb(182, 251, 255) 100%
+  ) !important;
+}
+
+.SSRback {
+  background: -webkit-linear-gradient(
+      45deg,
+      rgb(251, 215, 134) 0%,
+      rgb(251, 215, 134) 50%,
+      rgb(251, 215, 134) 54%,
+      rgb(247, 121, 125) 100%
+  );
+  background: -o-linear-gradient(
+      45deg,
+      rgb(251, 215, 134) 0%,
+      rgb(251, 215, 134) 50%,
+      rgb(251, 215, 134) 54%,
+      rgb(247, 121, 125) 100%
+  );
+  background: -ms-linear-gradient(
+      45deg,
+      rgb(251, 215, 134) 0%,
+      rgb(251, 215, 134) 50%,
+      rgb(251, 215, 134) 54%,
+      rgb(247, 121, 125) 100%
+  );
+  background: -moz-linear-gradient(
+      45deg,
+      rgb(251, 215, 134) 0%,
+      rgb(251, 215, 134) 50%,
+      rgb(251, 215, 134) 54%,
+      rgb(247, 121, 125) 100%
+  );
+  background: linear-gradient(
+      45deg,
+      rgb(251, 215, 134) 0%,
+      rgb(251, 215, 134) 50%,
+      rgb(251, 215, 134) 54%,
+      rgb(247, 121, 125) 100%
+  ) !important;
 }
 
 .common-layout {
-  font-family: shaonv, serif;
+  font-family: genshin, serif;
   height: 100%;
   /*加载背景图*/ /* 背景图不平铺 */
   background: url("../assets/ChouKaBeiJing.png") no-repeat fixed center center;
@@ -268,6 +370,7 @@ export default {
 #diamond {
   text-align: right;
   margin-right: 15px;
+  width: 18vw;
 }
 
 #recharge {
@@ -280,6 +383,7 @@ export default {
 #tuiChu {
   text-align: right;
   size: 18px;
+  margin-right: 15px;
 }
 
 .picture {
@@ -438,8 +542,8 @@ export default {
 }
 
 .btn-primary {
-  font-size: 25px;
-  font-family: shaonv, serif;
+  font-size: 22px;
+  font-family: genshin, serif;
   border: 0;
   background: rgba(0, 0, 0, 0.5);
 }

@@ -12,13 +12,6 @@
         controlslist="nodownload"
         class="video-box"
       ></video>
-      <img
-        src=""
-        alt=""
-        @click="operateVideo"
-        class="pointer operate-btn"
-        :class="{ 'fade-out': videoState }"
-      />
     </div>
   </div>
 </template>
@@ -32,11 +25,10 @@ export default {
       // 学时
       studyTime: {
         currentTime: 0, // 当前已学时长
-        duration: 0 // 总时长
+        duration: 0, // 总时长
       },
       timer: {}, // 定时器
       pauseTimer: {}, // 暂停定时器
-      src:""
     };
   },
   /**
@@ -47,25 +39,26 @@ export default {
    * @param videoData 视频基础数据
    */
   props: {
+    src: {
+      type: String,
+      required: true,
+       default: "",
+    },
     poster: {
       type: String,
       required: false,
-      default: ""
+      default: "",
     },
     controls: {
       type: Boolean,
       required: false,
-      default: true
+      default:false,
     },
     control: {
       type: Boolean,
       required: false,
-      default: false
+      default: false,
     },
-    videoData: {
-      type: Object,
-      required: true
-    }
   },
   mounted() {
     // 监听视频播放
@@ -108,11 +101,11 @@ export default {
         confirmButtonText: "确定",
         confirmButtonClass: "hint-btn",
         showClose: false,
-        callback: action => {
+        callback: (action) => {
           this.$refs.myVideo.currentTime = this.videoData.currentTime;
           this.operateVideo();
           this.openPauseTimer();
-        }
+        },
       });
     },
     // 获取当前播放位置
@@ -133,7 +126,7 @@ export default {
         this.$refs.myVideo.pause();
         this.videoState = false;
       }
-    }
+    },
   },
   watch: {
     // 监听操作
@@ -142,8 +135,8 @@ export default {
       if (currentTime && duration && currentTime < duration) {
         this.hintOperate();
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
